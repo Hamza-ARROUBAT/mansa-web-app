@@ -5,10 +5,6 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 // routers
 const userRouter = require('./api/routers/userRouter');
-const cardRouter = require('./api/routers/cardRouter');
-const productRouter = require('./api/routers/productRouter');
-const mailRouter = require('./api/routers/mailRouter');
-const transactionRouter = require('./api/routers/transactionRouter');
 
 // Load config
 dotenv.config({ path: './config/config.env' });
@@ -23,10 +19,6 @@ connectDB();
 
 // add routers
 app.use('/users', userRouter);
-app.use('/cards', cardRouter);
-app.use('/products', productRouter);
-app.use('/transactions', transactionRouter);
-app.use('/mails', mailRouter);
 
 app.listen(
   PORT,
