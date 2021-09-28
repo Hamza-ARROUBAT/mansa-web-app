@@ -22,61 +22,14 @@ const userSchema = new Schema(
       required: true,
       sparse: true,
     },
-    profileImg: {
-      type: String,
-      default: '',
-    },
-    gender: {
-      type: String,
-      required: true,
-    },
-    civilStatus: {
-      type: String,
-      required: true,
-    },
-    birthDate: {
-      type: String,
-      required: true,
-    },
-    nationality: {
-      type: String,
-      required: true,
-    },
-    identityType: {
-      type: String,
-      required: true,
-    },
-    identityNumber: {
-      type: String,
-      required: true,
-      sparse: true,
-    },
-    mobilePhoneNumber: {
-      type: String,
-      required: true,
-      sparse: true,
-    },
-    fixPhoneNumber: {
-      type: String,
-      default: '',
-      sparse: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      sparse: true,
-    },
     isEmailConfirmed: {
       type: Boolean,
       default: false,
     },
-    domicileAddress: {
+    role: {
       type: String,
       required: true,
-    },
-    status: {
-      type: String,
-      required: true,
+      sparse: true,
     },
     credentials: {
       username: {
