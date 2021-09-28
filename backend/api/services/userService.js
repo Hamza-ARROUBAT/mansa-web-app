@@ -9,7 +9,6 @@ const createUser = async (userData) => {
       username: generator.userId(),
     },
   });
-  console.log(newUser);
   return newUser.save();
 };
 

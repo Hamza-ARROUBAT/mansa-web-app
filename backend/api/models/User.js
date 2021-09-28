@@ -92,12 +92,6 @@ const userSchema = new Schema(
         default: true,
       },
     },
-    cards: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Card',
-      },
-    ],
   },
   { timestamps: true }
 );
