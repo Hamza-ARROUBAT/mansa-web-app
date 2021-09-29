@@ -10,6 +10,7 @@ import { Time } from '@styled-icons/boxicons-solid/Time';
 import { Users } from '@styled-icons/fa-solid/Users';
 import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
 
+// LodingScreen
 const LoadingScreen = styled.div`
   position: fixed;
   width: 100%;
@@ -26,10 +27,7 @@ const LoadingScreen = styled.div`
 `;
 const LogoContainer = styled.div`
   display: grid;
-  display: grid;
-  grid-template-columns: min-content max-content;
-  align-items: center;
-  gap: 0 15px;
+  grid-template-columns: max-content;
 
   img {
     width: 150px;
@@ -54,21 +52,22 @@ const LoaderContainer = styled.div`
   }
 `;
 
+// Container
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 20%;
-  margin-top: 100px;
+  grid-template-columns: max-content auto;
 `;
 
+// NavMenu
 const Nav = styled.nav`
+  display: grid;
   background: hsl(0, 0%, 95%);
-  height: min-content;
 `;
 
 const List = styled.ul`
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 4em 0;
 
   li:last-child {
     border: none;
@@ -117,6 +116,11 @@ const ListItem = styled.li`
             background: hsla(0, 0%, 0%, 8%);
           }
         `};
+`;
+
+// ContentContainer
+const ContentContainer = styled.div`
+  padding: 1em;
 `;
 
 export default function Home() {
@@ -225,6 +229,9 @@ export default function Home() {
             ))}
           </List>
         </Nav>
+
+        {/* ContentContainer */}
+        <ContentContainer>lol</ContentContainer>
       </Container>
     </>
   );

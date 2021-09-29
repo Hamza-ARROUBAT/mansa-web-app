@@ -5,9 +5,8 @@ import Logo from 'assets/images/svg/icons/logo.svg';
 
 const Nav = styled.nav`
   display: grid;
-  grid-template-columns: min-content auto;
+  grid-template-columns: min-content;
   align-items: center;
-  gap: 0 100px;
   background: hsl(0, 0%, 100%);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
   position: sticky;
@@ -17,7 +16,7 @@ const StyledLink = styled(Link)`
   display: grid;
   grid-template-columns: min-content max-content;
   align-items: center;
-  padding: 0.8em 2em;
+  padding: 0.8em 1em;
 
   img {
     width: 100px;
