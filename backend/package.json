@@ -1,7 +1,8 @@
 {
-  "name": "pcanet_mock_server",
+  "name": "mansa-web-app-backend",
   "version": "1.0.0",
-  "description": "mock server for PCANET.",
+  "private": true,
+  "description": "backend for mansa-web-app.",
   "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node app",
