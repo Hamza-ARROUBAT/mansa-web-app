@@ -10,6 +10,7 @@ const Nav = styled.nav`
   gap: 0 100px;
   background: hsl(0, 0%, 100%);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
+  position: sticky;
 `;
 
 const StyledLink = styled(Link)`
