@@ -8,7 +8,6 @@ const Nav = styled.nav`
   grid-template-columns: min-content auto;
   align-items: center;
   gap: 0 100px;
-  padding: 0.8em 2em;
   background: hsl(0, 0%, 100%);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 4px;
 `;
@@ -17,9 +16,10 @@ const StyledLink = styled(Link)`
   display: grid;
   grid-template-columns: min-content max-content;
   align-items: center;
-  gap: 0 15px;
+  padding: 0.8em 2em;
+
   img {
-    width: 80px;
+    width: 100px;
   }
 
   p {
