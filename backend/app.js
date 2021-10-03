@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const fileUpload = require('express-fileupload');
 
 const connectDB = require('./config/db');
 
@@ -18,8 +19,15 @@ connectDB();
 
 // routers
 const userRouter = require('./api/routers/userRouter');
+const contributionRouter = require('./api/routers/contributionRouter');
 
+app.use(
+  fileUpload({
+    createParentPath: true,
+  })
+);
 app.use('/users', userRouter);
+app.use('/contribution', contributionRouter);
 
 const posts = [
   {

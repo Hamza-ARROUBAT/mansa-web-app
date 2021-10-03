@@ -27,11 +27,12 @@ const SelectButton = styled.button`
   outline: none;
   p {
     text-align: left;
-    padding: 11.5px 9px;
+    padding: 0;
+    padding: 1em 9px;
     margin: 0;
     border-radius: 3px;
     font-size: 14px;
-    color: #c0bebe;
+    color: gray;
     white-space: nowrap;
   }
 
@@ -63,7 +64,7 @@ const List = styled.ul`
   width: 100%;
   position: absolute;
   z-index: 100;
-  top: 69.5%;
+  top: 72.5%;
   right: 0;
   left: 10;
   background-color: #f6f7f8;
@@ -78,6 +79,23 @@ const List = styled.ul`
 
   li:first-child {
     border-radius: 5px 0 0 0;
+  }
+
+  /* scrollbar */
+  scrollbar-width: thin;
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(214deg 100% 45%);
+    border-radius: 25px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #ededed;
   }
 `;
 

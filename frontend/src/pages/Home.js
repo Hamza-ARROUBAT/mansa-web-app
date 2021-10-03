@@ -129,7 +129,7 @@ const Header = styled.div`
   display: grid;
   padding-bottom: 0.5em;
   border-bottom: 1px solid hsla(0, 0%, 0%, 15%);
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   
   h1 {
     margin: 0;

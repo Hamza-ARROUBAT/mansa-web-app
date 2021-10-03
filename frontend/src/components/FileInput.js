@@ -45,7 +45,7 @@ function TextInput({
   label,
   name,
   placeholder,
-  isDate,
+  accept,
   register,
   errorMessage,
 }) {
@@ -57,16 +57,18 @@ function TextInput({
           <input
             id={name}
             name={name}
-            type={isDate ? 'date' : 'text'}
             placeholder={placeholder}
+            type="file"
+            accept={accept}
             {...register(name)}
           />
         ) : (
           <input
             id={name}
             name={name}
-            type={isDate ? 'date' : 'text'}
             placeholder={placeholder}
+            type="file"
+            accept={accept}
           />
         )}
       </InputContainer>
