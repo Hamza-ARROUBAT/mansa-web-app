@@ -1,3 +1,4 @@
+import { FileUpload } from '@styled-icons/fa-solid';
 import React from 'react';
 import { SemipolarLoading } from 'react-loadingg';
 import styled from 'styled-components';
@@ -9,13 +10,14 @@ const Table = styled.table`
   display: grid;
   border-collapse: collapse;
   grid-template-columns:
-    min-content
-    minmax(150px, 1.5fr)
-    minmax(150px, 1.5fr)
+    minmax(150px, 1fr)
+    minmax(150px, 1fr)
+    minmax(150px, 1fr)
+    minmax(150px, 1fr)
     minmax(150px, 1fr)
     minmax(150px, 1fr);
   grid-template-rows: max-content auto;
-  height: ${({ games }) => (games.length < 7 ? 'auto' : '345px')};
+  height: ${({ data }) => (data.length < 7 ? 'auto' : '345px')};
 
   /* scrollbar */
   overflow: auto;
@@ -69,11 +71,11 @@ const Table = styled.table`
     text-align: left;
   }
 
-  th:first-child {
+  th:last-child {
     text-align: center;
   }
 
-  td:first-child {
+  td:last-child {
     text-align: center;
   }
 
@@ -115,41 +117,47 @@ const LoaderContainer = styled.div`
   }
 `;
 
-export default function TableComponent({ type, header, isLoading, games }) {
-  const getColor = (position) => {
-    switch (position) {
-      case 1:
-        return 'hsl(51, 100%, 41%)';
-      case 2:
-        return 'hsl(0, 0%, 65%)';
-      case 3:
-        return 'hsl(30, 36%, 45%)';
+const DocumentButton = styled.button`
+  place-content: center;
+  cursor: pointer;
+  outline: none;
+  margin: 0 auto;
+  margin-top: -6px;
+  display: grid;
+  align-items: center;
+  border: 1px solid hsl(214deg 100% 45%);
+  width: min-content;
+  padding: 0.5em 1.8em;
+  border-radius: 10px;
+  background: hsl(214deg 100% 45%);
+  color: hsl(0, 0%, 100%);
+  transition: color 0.2s;
 
-      default:
-        return 'black';
-    }
-  };
+  svg {
+    width: 10px;
+    color: hsl(0, 0%, 100%);
+    transition: color 0.2s;
+  }
 
-  const getMedal = (position) => {
-    switch (position) {
-      case 1:
-        return '🥇';
-      case 2:
-        return '🥈';
-      case 3:
-        return '🥉';
+  transition: background 0.2s, color 0.2s;
+  :hover {
+    background: hsl(214deg 100% 40%);
+  }
+`;
 
-      default:
-        return position;
-    }
+export default function TableComponent({ header, isLoading, data }) {
+  // formats
+  const formatDate = (fullDate) => {
+    const dateArray = fullDate.split('T')[0].split('-');
+    const formatedDate = dateArray.reverse().join('/');
+    return formatedDate;
   };
 
   return (
     <Container>
-      <Table games={games}>
+      <Table data={data}>
         <TableHead>
           <tr>
-            <th>#</th>
             {header.map((head) => (
               <th>{head}</th>
             ))}
@@ -157,20 +165,17 @@ export default function TableComponent({ type, header, isLoading, games }) {
         </TableHead>
         <TableBody>
           {!isLoading ? (
-            games.map((game, index) => (
-              <GameRow
-                isTop={game.position <= 3}
-                rowColor={getColor(game.position)}
-                key={index}
-              >
-                <td>{getMedal(game.position)}</td>
-                <td>{game.game}</td>
-                <td>{game.platforms.join(', ')}</td>
-                <td>{game.genre}</td>
+            data.map((contribution, index) => (
+              <GameRow key={index}>
+                <td>{formatDate(contribution.createdAt)}</td>
+                <td>{contribution.legalName}</td>
+                <td>{contribution.legalName}</td>
+                <td>{contribution.country}</td>
+                <td>{contribution.city}</td>
                 <td>
-                  {type === 'byTimePlayed'
-                    ? game.totalPlayTime
-                    : game.totalPlayers}
+                  <DocumentButton>
+                    <FileUpload />
+                  </DocumentButton>
                 </td>
               </GameRow>
             ))
