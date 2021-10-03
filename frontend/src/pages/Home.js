@@ -6,7 +6,7 @@ import { Users } from '@styled-icons/fa-solid/Users';
 import { Done } from '@styled-icons/material/Done';
 import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
 import Logo from 'assets/images/svg/icons/logo.svg';
-import MakeContribution from 'features/contribution/MakeContribution';
+import Contribute from 'pages/Contribute';
 import ChangePassword from 'features/user/ChangePassword';
 import React, { useEffect, useState } from 'react';
 import { SemipolarLoading } from 'react-loadingg';
@@ -215,7 +215,7 @@ export default function Home() {
       case 0:
         return;
       case 1:
-        return <MakeContribution />;
+        return <Contribute />;
       case 'Inbox':
         return <Inbox />;
       case 'Done':

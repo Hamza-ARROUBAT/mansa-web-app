@@ -66,7 +66,7 @@ const IdentificationForm = styled.form`
   padding: 0 1.5em 0 0;
 `;
 
-export default function MakeContribution() {
+export default function Contribute() {
   // Select inputs
   const [legalForm, setLegalForm] = useState();
   const [city, setCity] = useState();
