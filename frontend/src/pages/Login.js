@@ -65,6 +65,7 @@ const InputContainer = styled.div`
 const LeftInputIcon = styled.div`
   svg {
     width: 25px;
+    color: hsl(0, 0%, 20%);
     transition: color 0.3s;
   }
 `;
