@@ -168,7 +168,7 @@ export default function AppLayout({ children }) {
     {
       icon: 'PersonFill',
       name: 'Profile',
-      path: '/profile',
+      path: '/',
     },
     {
       icon: 'PencilSquare',
@@ -202,7 +202,7 @@ export default function AppLayout({ children }) {
     },
   ];
 
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
 
   const getIcon = (icon) => {
     switch (icon) {

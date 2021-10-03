@@ -20,7 +20,7 @@ export default function App() {
       {isConnected ? (
         <AppLayoutConnected>
           <Switch>
-            <Route exact path="/profile">
+            <Route exact path="/">
               <Profile />
             </Route>
             <Route exact path="/contribute">
@@ -46,7 +46,7 @@ export default function App() {
       ) : (
         <AppLayoutDisconnected>
           <Route exact path="/">
-            <Login />
+            <Login setIsConnected={setIsConnected} />
           </Route>
         </AppLayoutDisconnected>
       )}

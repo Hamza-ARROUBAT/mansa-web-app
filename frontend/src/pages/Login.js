@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { User } from '@styled-icons/boxicons-regular/User';
 import { LockPassword } from '@styled-icons/remix-line/LockPassword';
 import Logo from 'assets/images/svg/icons/logo.svg';
+import axios from 'axios';
 
 const Container = styled.div`
   display: grid;
@@ -124,38 +125,30 @@ const ButtonContainer = styled.div`
   }
 `;
 
-export default function Login() {
+export default function Login(setIsConnected) {
   const [user, setUser] = useState({});
+  const [errorLogin, setErrorLogin] = useState(false);
+
   const onSubmit = (data) => {
-    // const isFirstLogin = useSelector(state => state.user.data.isFirstLogin)
-    // changeConnectionState(dispatch, isConnected)
-    // history.push({
-    //   pathname: `/${locale}${formatMessage({
-    //     id: routes.home.route,
-    //   })}`,
-    //   state: formData,
-    // });
-    // setIsFirstLogin(true);
-    // setStep(2);
-    // Axios({
-    //   method: 'get',
-    //   url: `http://localhost:5000/users/is-first-time-login/${data.username}`,
-    // })
-    //   .then((res) => {
-    //     if (res.data === true) {
-    //       setUser({ username: data.username });
-    //       setIsFirstLogin(true);
-    //     } else {
-    //       setUser({ username: data.username });
-    //       setStep(2);
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
+    axios({
+      method: 'post',
+      url: `http://localhost:5000/users/auth`,
+      data,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   // form
   const schema = yup.object().shape({
-    username: yup.string().required('Ce champ est requis'),
+    username: yup.string().required('Required field'),
+    password: yup.string().required('Required field'),
   });
   const {
     register,
@@ -184,7 +177,7 @@ export default function Login() {
                 <input
                   autocomplete="off"
                   type="text"
-                  placeholder="Votre Identifiant"
+                  placeholder="Username"
                   name="username"
                   {...register('username')}
                 />
@@ -203,7 +196,7 @@ export default function Login() {
                 <input
                   autocomplete="off"
                   type="password"
-                  placeholder="Votre mot de passe"
+                  placeholder="Password"
                   name="password"
                   {...register('password')}
                 />

@@ -25,6 +25,21 @@ const fetch_one_user = (req, res) => {
     });
 };
 
+const auth_user = (req, res) => {
+  const { username, password } = req.body;
+  User.findOne({ 'credentials.username': username })
+    .then((user) => {
+      if (user.credentials.password === password) {
+        res.status(200).json(user);
+      } else {
+        res.status(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 const add_user = (req, res) => {
   const userData = req.body;
 
@@ -78,6 +93,7 @@ module.exports = {
   fetch_all_users,
   fetch_one_user,
   add_user,
+  auth_user,
   email_confirmed,
   is_first_time_login,
   create_password,

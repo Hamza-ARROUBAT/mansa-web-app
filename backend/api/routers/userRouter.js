@@ -8,6 +8,8 @@ router.get('/:id', userController.fetch_one_user);
 
 router.post('/', userController.add_user);
 
+router.post('/auth', userController.auth_user);
+
 router.get('/email-confirmed/:username', userController.email_confirmed);
 // router.put('/verify-email', userController.confirm_email);
 router.get('/is-first-time-login/:username', userController.is_first_time_login);

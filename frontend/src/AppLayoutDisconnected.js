@@ -8,7 +8,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background: hsla(214, 100%, 20%, 75%);
+  background: hsla(0, 0%, 0%, 20%);
 `;
 
 export default function AppLayout({ children }) {
