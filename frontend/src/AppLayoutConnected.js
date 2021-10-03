@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Inbox } from '@styled-icons/bootstrap/Inbox';
 import { PencilSquare } from '@styled-icons/bootstrap/PencilSquare';
@@ -9,6 +9,8 @@ import { Done } from '@styled-icons/material/Done';
 import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
 import Header from 'components/Header';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { contributorTabs, verifierTabs } from 'utils/tabs';
 // import Logo from 'assets/images/svg/icons/logo.svg';
 // import { SemipolarLoading } from 'react-loadingg';
 
@@ -163,44 +165,19 @@ export default function AppLayout({ children }) {
   //   }, 3000);
   // }, []);
 
-  // NavMenu
-  const tabs = [
-    {
-      icon: 'PersonFill',
-      name: 'Profile',
-      path: '/',
-    },
-    {
-      icon: 'PencilSquare',
-      name: 'Contribute',
-      path: '/contribute',
-    },
-    {
-      icon: 'Inbox',
-      name: 'New Incoming Requests',
-      path: '/new-incoming-requests',
-    },
-    {
-      icon: 'Done',
-      name: 'Completed Requests',
-      path: '/completed-requests',
-    },
-    {
-      icon: 'Time',
-      name: 'Open Request',
-      path: '/open-requests',
-    },
-    {
-      icon: 'Users',
-      name: 'Manage Users',
-      path: '/manage-users',
-    },
-    {
-      icon: 'LockPassword',
-      name: 'Change Password',
-      path: '/change-password',
-    },
-  ];
+  // tabs
+  const user = useSelector((state) => state.user);
+  const [tabs, setTabs] = useState([]);
+  console.log(user);
+
+  useEffect(() => {
+    if (user.data.role === 'adminContributor') {
+      setTabs(contributorTabs);
+      console.log(contributorTabs);
+    } else if (user.data.role === 'adminVerifier') {
+      setTabs(verifierTabs);
+    }
+  }, [user.data.role]);
 
   const [activeTab, setActiveTab] = useState(0);
 
@@ -225,19 +202,19 @@ export default function AppLayout({ children }) {
         return;
     }
   };
-  return (
+  return tabs.length !== 0 ? (
     <Container>
       <Header />
       <Body>
         {/* LoadingScreen */}
         {/* <LoadingScreen animate={animate} disappear={disappear}>
-        <LogoContainer>
-          <img src={Logo} alt="Logo" />
-        </LogoContainer>
-        <LoaderContainer>
-          <SemipolarLoading />
-        </LoaderContainer>
-      </LoadingScreen> */}
+    <LogoContainer>
+      <img src={Logo} alt="Logo" />
+    </LogoContainer>
+    <LoaderContainer>
+      <SemipolarLoading />
+    </LoaderContainer>
+  </LoadingScreen> */}
 
         {/* NavMenu */}
         <Nav>
@@ -266,5 +243,7 @@ export default function AppLayout({ children }) {
         </ContentContainer>
       </Body>
     </Container>
+  ) : (
+    <h1>Loading</h1>
   );
 }

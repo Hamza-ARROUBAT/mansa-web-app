@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -6,7 +7,7 @@ import * as yup from 'yup';
 import { User } from '@styled-icons/boxicons-regular/User';
 import { LockPassword } from '@styled-icons/remix-line/LockPassword';
 import Logo from 'assets/images/svg/icons/logo.svg';
-import axios from 'axios';
+import { authUser } from 'store/reducers/user/user.action';
 
 const Container = styled.div`
   display: grid;
@@ -125,24 +126,11 @@ const ButtonContainer = styled.div`
   }
 `;
 
-export default function Login(setIsConnected) {
-  const [user, setUser] = useState({});
-  const [errorLogin, setErrorLogin] = useState(false);
+export default function Login() {
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    axios({
-      method: 'post',
-      url: `http://localhost:5000/users/auth`,
-      data,
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          console.log(res);
-        } else {
-          console.log(res);
-        }
-      })
-      .catch((err) => console.log(err));
+    dispatch(authUser(data));
   };
 
   // form
@@ -153,7 +141,6 @@ export default function Login(setIsConnected) {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',

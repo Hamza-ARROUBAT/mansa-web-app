@@ -8,24 +8,33 @@ import ManageUsers from 'pages/ManageUsers';
 import NewIncomingRequests from 'pages/NewIncomingRequests';
 import OpenRequests from 'pages/OpenRequests';
 import Profile from 'pages/Profile';
-import React, { useState } from 'react';
+import Verify from 'pages/Verify';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Route } from 'react-router';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 export default function App() {
-  const [isConnected, setIsConnected] = useState(false);
+  const user = useSelector((state) => state.user);
 
   return (
     <Router>
-      {isConnected ? (
+      {user.isConnected ? (
         <AppLayoutConnected>
           <Switch>
             <Route exact path="/">
               <Profile />
             </Route>
-            <Route exact path="/contribute">
-              <Contribute />
-            </Route>
+            {user.data.role === 'adminContributor' && (
+              <Route exact path="/contribute">
+                <Contribute />
+              </Route>
+            )}
+            {user.data.role === 'adminVerifier' && (
+              <Route exact path="/contribute">
+                <Verify />
+              </Route>
+            )}
             <Route exact path="/new-incoming-requests">
               <NewIncomingRequests />
             </Route>
@@ -46,7 +55,7 @@ export default function App() {
       ) : (
         <AppLayoutDisconnected>
           <Route exact path="/">
-            <Login setIsConnected={setIsConnected} />
+            <Login />
           </Route>
         </AppLayoutDisconnected>
       )}
