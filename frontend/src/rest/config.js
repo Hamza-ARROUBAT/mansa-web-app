@@ -3,14 +3,20 @@ const BASE_URL = 'http://localhost:5000';
 
 // Routers
 const USERS_ROUTER = BASE_URL + '/users';
+const CONTRIBUTIONS_ROUTER = BASE_URL + '/contributions';
 
-// Methods
+// Controllers
 // ATHENTICATION_CONTROLLER
 export const POST_AUTH_USER = {
   url: USERS_ROUTER + '/auth',
   type: 'POST',
 };
 
+// CONTRIBUTIONS_CONTROLLER
+export const GET_ALL_CONTRIBUTIONS = {
+  url: CONTRIBUTIONS_ROUTER + '/all',
+  type: 'GET',
+};
 // Beneficiaries
 // export const GET_BENEFICIARIES = {
 //   url: BENEFICIARIES_CONTROLLER,

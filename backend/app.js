@@ -27,7 +27,7 @@ app.use(
   })
 );
 app.use('/users', userRouter);
-app.use('/contribution', contributionRouter);
+app.use('/contributions', contributionRouter);
 
 const posts = [
   {
