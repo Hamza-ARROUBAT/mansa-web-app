@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   html, body {
     height: 100%;
-    font-family: 'Futura', Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #ffffff;

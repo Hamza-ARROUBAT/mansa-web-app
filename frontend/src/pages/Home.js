@@ -186,7 +186,7 @@ export default function Home() {
     },
   ];
 
-  const [activeTab, setActiveTab] = useState(6);
+  const [activeTab, setActiveTab] = useState(1);
 
   const getIcon = (icon) => {
     switch (icon) {
@@ -235,14 +235,14 @@ export default function Home() {
   return (
     <>
       {/* LoadingScreen */}
-      <LoadingScreen animate={animate} disappear={disappear}>
+      {/* <LoadingScreen animate={animate} disappear={disappear}>
         <LogoContainer>
           <img src={Logo} alt="Logo" />
         </LogoContainer>
         <LoaderContainer>
           <SemipolarLoading />
         </LoaderContainer>
-      </LoadingScreen>
+      </LoadingScreen> */}
 
       {/* NavMenu */}
       <Container>
