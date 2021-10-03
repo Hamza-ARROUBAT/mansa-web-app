@@ -1,14 +1,16 @@
+import { Inbox } from '@styled-icons/bootstrap/Inbox';
+import { PencilSquare } from '@styled-icons/bootstrap/PencilSquare';
+import { PersonFill } from '@styled-icons/bootstrap/PersonFill';
+import { Time } from '@styled-icons/boxicons-solid/Time';
+import { Users } from '@styled-icons/fa-solid/Users';
+import { Done } from '@styled-icons/material/Done';
+import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
 import Logo from 'assets/images/svg/icons/logo.svg';
+import MakeContribution from 'features/contribution/MakeContribution';
+import ChangePassword from 'features/user/ChangePassword';
 import React, { useEffect, useState } from 'react';
 import { SemipolarLoading } from 'react-loadingg';
 import styled, { css } from 'styled-components';
-import { PersonFill } from '@styled-icons/bootstrap/PersonFill';
-import { PencilSquare } from '@styled-icons/bootstrap/PencilSquare';
-import { Inbox } from '@styled-icons/bootstrap/Inbox';
-import { Done } from '@styled-icons/material/Done';
-import { Time } from '@styled-icons/boxicons-solid/Time';
-import { Users } from '@styled-icons/fa-solid/Users';
-import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
 
 // LodingScreen
 const LoadingScreen = styled.div`
@@ -79,7 +81,7 @@ const ListItem = styled.li`
   grid-template-columns: max-content auto;
   align-items: end;
   gap: 0 10px;
-  border-bottom: 1px solid hsla(0, 0%, 0%, 5%);
+  border-bottom: 1px solid hsla(0, 0%, 0%, 10%);
   padding: 0.5em 1em;
 
   svg {
@@ -120,7 +122,22 @@ const ListItem = styled.li`
 
 // ContentContainer
 const ContentContainer = styled.div`
-  padding: 1em;
+  padding: 4em 2em;
+`;
+
+const Header = styled.div`
+  display: grid;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid hsla(0, 0%, 0%, 15%);
+  margin-bottom: 50px;
+  
+  h1 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: hsl(214deg 100% 45%);
+  }
 `;
 
 export default function Home() {
@@ -141,42 +158,35 @@ export default function Home() {
   const tabs = [
     {
       icon: 'PersonFill',
-      key: 1,
       name: 'Profile',
     },
     {
       icon: 'PencilSquare',
-      key: 2,
       name: 'Contribute',
     },
     {
       icon: 'Inbox',
-      key: 3,
       name: 'New Incoming Requests',
     },
     {
       icon: 'Done',
-      key: 4,
       name: 'Completed Requests',
     },
     {
       icon: 'Time',
-      key: 5,
       name: 'Open Request',
     },
     {
       icon: 'Users',
-      key: 6,
       name: 'Manage Users',
     },
     {
       icon: 'LockPassword',
-      key: 7,
       name: 'Change Password',
     },
   ];
 
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(6);
 
   const getIcon = (icon) => {
     switch (icon) {
@@ -200,6 +210,28 @@ export default function Home() {
     }
   };
 
+  const getContent = (key) => {
+    switch (key) {
+      case 0:
+        return;
+      case 1:
+        return <MakeContribution />;
+      case 'Inbox':
+        return <Inbox />;
+      case 'Done':
+        return <Done />;
+      case 'Time':
+        return <Time />;
+      case 'Users':
+        return <Users />;
+      case 6:
+        return <ChangePassword />;
+
+      default:
+        return;
+    }
+  };
+
   return (
     <>
       {/* LoadingScreen */}
@@ -216,11 +248,11 @@ export default function Home() {
       <Container>
         <Nav>
           <List>
-            {tabs.map((tab) => (
+            {tabs.map((tab, index) => (
               <ListItem
-                active={activeTab === tab.key}
+                active={activeTab === index}
                 onClick={() => {
-                  setActiveTab(tab.key);
+                  setActiveTab(index);
                 }}
               >
                 {getIcon(tab.icon)}
@@ -231,7 +263,12 @@ export default function Home() {
         </Nav>
 
         {/* ContentContainer */}
-        <ContentContainer>lol</ContentContainer>
+        <ContentContainer>
+          <Header>
+            <h1>{tabs[activeTab]?.name}</h1>
+          </Header>
+          {getContent(activeTab)}
+        </ContentContainer>
       </Container>
     </>
   );
