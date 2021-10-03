@@ -45,7 +45,7 @@ export const verifierTabs = [
   {
     icon: 'Notepad',
     name: 'Verify',
-    path: '/Verify',
+    path: '/verify',
   },
   {
     icon: 'Inbox',

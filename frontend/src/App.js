@@ -31,7 +31,7 @@ export default function App() {
               </Route>
             )}
             {user.data.role === 'adminVerifier' && (
-              <Route exact path="/contribute">
+              <Route exact path="/verify">
                 <Verify />
               </Route>
             )}

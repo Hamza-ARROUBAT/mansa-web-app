@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Inbox } from '@styled-icons/bootstrap/Inbox';
 import { PencilSquare } from '@styled-icons/bootstrap/PencilSquare';
+import { Notepad } from '@styled-icons/boxicons-solid/Notepad';
 import { PersonFill } from '@styled-icons/bootstrap/PersonFill';
 import { Time } from '@styled-icons/boxicons-solid/Time';
 import { Users } from '@styled-icons/fa-solid/Users';
@@ -187,6 +188,8 @@ export default function AppLayout({ children }) {
         return <PersonFill />;
       case 'PencilSquare':
         return <PencilSquare />;
+      case 'Notepad':
+        return <Notepad />;
       case 'Inbox':
         return <Inbox />;
       case 'Done':
