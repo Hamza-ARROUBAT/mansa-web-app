@@ -11,7 +11,7 @@ import Profile from 'pages/Profile';
 import Verify from 'pages/Verify';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Route } from 'react-router';
+import { Redirect, Route } from 'react-router';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 export default function App() {
@@ -56,6 +56,9 @@ export default function App() {
         <AppLayoutDisconnected>
           <Route exact path="/">
             <Login />
+          </Route>
+          <Route path="*">
+            <Redirect to="/" />
           </Route>
         </AppLayoutDisconnected>
       )}
