@@ -45,6 +45,7 @@ const TextContainer = styled.div`
   grid-column: 1 / 3;
   margin-bottom: 15px;
   p {
+    text-transform: capitalize;
     white-space: nowrap;
     margin: 0;
     font-size: 1.2rem;

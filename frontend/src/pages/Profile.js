@@ -13,6 +13,7 @@ const InfosContainer = styled.div``;
 const TextContainer = styled.div`
   margin-bottom: 15px;
   p {
+    text-transform: capitalize;
     white-space: nowrap;
     margin: 0;
     font-size: 1.2rem;
