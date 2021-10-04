@@ -1,7 +1,7 @@
 import { FileUpload } from '@styled-icons/fa-solid';
-import React from 'react';
+import React, { useState } from 'react';
 import { SemipolarLoading } from 'react-loadingg';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   display: grid;
@@ -83,19 +83,31 @@ const Table = styled.table`
     align-items: flex-start;
     tr {
       cursor: pointer;
-      :hover {
-        td {
-          transition: background 0.2s;
-          background: rgba(0, 0, 0, 0.0625);
-        }
-      }
     }
   }
 `;
 
-const GameRow = styled.tr`
-  color: ${({ rowColor }) => rowColor};
-  font-weight: ${({ isTop }) => isTop && 'bold'};
+const DataRow = styled.tr`
+  td {
+    transition: background 0.2s;
+  }
+
+  ${({ selected }) =>
+    selected
+      ? css`
+          cursor: default !important;
+
+          td {
+            background: hsla(0, 0%, 0%, 25%);
+          }
+        `
+      : css`
+          :hover {
+            td {
+              background: hsla(0, 0%, 0%, 5%);
+            }
+          }
+        `};
 `;
 
 const TableHead = styled.thead`
@@ -145,7 +157,13 @@ const DocumentButton = styled.button`
   }
 `;
 
-export default function TableComponent({ header, isLoading, data }) {
+export default function TableComponent({
+  header,
+  isLoading,
+  data,
+  selected,
+  setSelected,
+}) {
   // formats
   const formatDate = (fullDate) => {
     const dateArray = fullDate.split('T')[0].split('-');
@@ -166,7 +184,13 @@ export default function TableComponent({ header, isLoading, data }) {
         <TableBody>
           {!isLoading ? (
             data.map((contribution, index) => (
-              <GameRow key={index}>
+              <DataRow
+                key={index}
+                selected={selected.id === contribution.id}
+                onClick={() => {
+                  setSelected(contribution);
+                }}
+              >
                 <td>{formatDate(contribution.createdAt)}</td>
                 <td>{contribution.legalName}</td>
                 <td>{contribution.legalName}</td>
@@ -177,7 +201,7 @@ export default function TableComponent({ header, isLoading, data }) {
                     <FileUpload />
                   </DocumentButton>
                 </td>
-              </GameRow>
+              </DataRow>
             ))
           ) : (
             <LoaderContainer>

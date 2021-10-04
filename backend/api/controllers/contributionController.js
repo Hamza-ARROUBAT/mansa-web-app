@@ -20,7 +20,20 @@ const add_contribution = (req, res) => {
     .catch((err) => console.log('createContribution error', err));
 };
 
+const delete_contribution = (req, res) => {
+  const { id } = req.params.id;
+
+  Contribution.findOneAndDelete({ id: id })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   fetch_all_contributions,
   add_contribution,
+  delete_contribution,
 };
