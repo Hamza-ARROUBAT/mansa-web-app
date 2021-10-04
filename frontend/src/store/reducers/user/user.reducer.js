@@ -3,7 +3,7 @@ import { AUTH_USER_SUCCESS, DISCONNECT_USER } from './user.types';
 
 const initialState = {
   isLoading: true,
-  data: [],
+  data: {},
   isConnected: false,
 };
 
