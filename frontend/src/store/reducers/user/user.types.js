@@ -7,4 +7,4 @@ export const AUTH_USER = 'AUTH_USER';
 export const AUTH_USER_SUCCESS = typeCreator(AUTH_USER, successTag);
 export const AUTH_USER_ERROR = typeCreator(AUTH_USER, errorTag);
 
-// export const DELETE_MOVIE = 'DELETE_MOVIE';
+export const DISCONNECT_USER = 'DISCONNECT_USER';

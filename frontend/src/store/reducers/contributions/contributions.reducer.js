@@ -24,14 +24,14 @@ const contributionsReducer = produce((draft, action) => {
 
     case ADD_CONTRIBUTION_SUCCESS:
       draft.isLoading = true;
-      draft.data = [...currentDraft.data, action.contribution];
+      draft.data = [...currentDraft.data, action.payload.contribution];
       draft.isLoading = false;
       break;
 
     case REMOVE_CONTRIBUTION_SUCCESS:
       draft.isLoading = true;
       draft.data = currentDraft.data.filter(
-        (contribution) => contribution.id !== action.id
+        (contribution) => contribution.id !== action.payload.id
       );
       draft.isLoading = false;
       break;

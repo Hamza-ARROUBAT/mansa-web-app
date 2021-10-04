@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { AUTH_USER_SUCCESS } from './user.types';
+import { AUTH_USER_SUCCESS, DISCONNECT_USER } from './user.types';
 
 const initialState = {
   isLoading: true,
@@ -7,7 +7,7 @@ const initialState = {
   isConnected: false,
 };
 
-const cardsReducer = produce((draft, action) => {
+const userReducer = produce((draft, action) => {
   // globals
   // const currentDraft = current(draft);
 
@@ -20,9 +20,15 @@ const cardsReducer = produce((draft, action) => {
       draft.isLoading = false;
       break;
 
+    case DISCONNECT_USER:
+      draft.isLoading = true;
+      draft.isConnected = false;
+      draft.isLoading = false;
+      break;
+
     default:
       break;
   }
 }, initialState);
 
-export default cardsReducer;
+export default userReducer;
