@@ -17,6 +17,14 @@ export const GET_ALL_CONTRIBUTIONS = {
   url: CONTRIBUTIONS_ROUTER + '/all',
   type: 'GET',
 };
+export const POST_CONTRIBUTION = {
+  url: CONTRIBUTIONS_ROUTER,
+  type: 'POST',
+};
+export const DELETE_CONTRIBUTION = {
+  url: CONTRIBUTIONS_ROUTER,
+  type: 'DELETE',
+};
 // Beneficiaries
 // export const GET_BENEFICIARIES = {
 //   url: BENEFICIARIES_CONTROLLER,

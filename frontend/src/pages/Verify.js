@@ -1,7 +1,10 @@
 import TableComponent from 'components/TableComponent';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllContributions } from 'store/reducers/contributions/contributions.action';
+import {
+  deleteContribution,
+  getAllContributions,
+} from 'store/reducers/contributions/contributions.action';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -78,6 +81,9 @@ export default function Verify() {
 
   const [selected, setSelected] = useState({});
 
+  const handleClick = () => {
+    dispatch(deleteContribution(selected.id));
+  };
   return (
     <Container>
       <TableComponent
@@ -97,21 +103,21 @@ export default function Verify() {
       <ButtonsContainer>
         <button
           disabled={Object.keys(selected).length === 0}
-          onClick={() => {}}
+          onClick={handleClick}
           type="button"
         >
           Accept
         </button>
         <button
           disabled={Object.keys(selected).length === 0}
-          onClick={() => {}}
+          onClick={handleClick}
           type="button"
         >
           Resend
         </button>
         <button
           disabled={Object.keys(selected).length === 0}
-          onClick={() => {}}
+          onClick={handleClick}
           type="button"
         >
           Reject

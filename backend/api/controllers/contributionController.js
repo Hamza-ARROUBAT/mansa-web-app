@@ -21,11 +21,10 @@ const add_contribution = (req, res) => {
 };
 
 const delete_contribution = (req, res) => {
-  const { id } = req.params.id;
-
+  const id = req.params.id;
   Contribution.findOneAndDelete({ id: id })
     .then((result) => {
-      res.json(result);
+      res.status(200).json(result);
     })
     .catch((err) => {
       console.error(err);

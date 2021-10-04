@@ -6,7 +6,8 @@ import * as yup from 'yup';
 import FileInput from 'components/FileInput';
 import TextInput from 'components/TextInput';
 import SelectInput from 'components/SelectInput';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { postContribution } from 'store/reducers/contributions/contributions.action';
 
 const Container = styled.div`
   display: grid;
@@ -67,6 +68,8 @@ const IdentificationForm = styled.form`
 `;
 
 export default function Contribute() {
+  const dispatch = useDispatch();
+
   // Select inputs
   const [legalForm, setLegalForm] = useState();
   const [city, setCity] = useState();
@@ -93,22 +96,14 @@ export default function Contribute() {
         documentFile: data.documentFile[0],
       };
 
-      const formDataReq = new FormData();
-      for (const [key, value] of Object.entries(formData)) {
-        formDataReq.append(`${key.toString()}`, value);
-        console.log(`${key}`, `${value}`);
-      }
+      // const formDataReq = new FormData();
+      // for (const [key, value] of Object.entries(formData)) {
+      //   formDataReq.append(`${key.toString()}`, value);
+      //   console.log(`${key}`, `${value}`);
+      // }
 
-      axios({
-        method: 'post',
-        url: 'http://localhost:5000/contribution',
-        data: formDataReq,
-      })
-        .then((response) => {
-          console.log(response);
-          window.location.reload();
-        })
-        .catch((err) => console.error(err));
+      dispatch(postContribution(formData));
+      // window.location.reload();
     }
   };
 

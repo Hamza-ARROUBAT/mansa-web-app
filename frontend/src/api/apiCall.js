@@ -20,8 +20,8 @@ export function* apiCall(action) {
       payload: response,
     });
   } catch (error) {
-    const errorType = typeCreator(type, errorTag);
-    const errorObject = errorHandler(errorType, error);
-    console.error(errorObject);
+    // const errorType = typeCreator(type, errorTag);
+    // const errorObject = errorHandler(errorType, error);
+    console.error(error);
   }
 }

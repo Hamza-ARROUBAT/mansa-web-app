@@ -1,11 +1,39 @@
-import { FETCH_ALL_CONTRIBUTIONS } from './contributions.types';
-import { GET_ALL_CONTRIBUTIONS } from 'rest/config';
+import {
+  ADD_CONTRIBUTION,
+  FETCH_ALL_CONTRIBUTIONS,
+  REMOVE_CONTRIBUTION,
+} from './contributions.types';
+import {
+  DELETE_CONTRIBUTION,
+  GET_ALL_CONTRIBUTIONS,
+  POST_CONTRIBUTION,
+} from 'rest/config';
 
 export const getAllContributions = () => ({
   type: FETCH_ALL_CONTRIBUTIONS,
   request: {
     METHOD: GET_ALL_CONTRIBUTIONS.type,
     ENDPOINT: GET_ALL_CONTRIBUTIONS.url,
+    PAYLOAD: {},
+    HEADERS: {},
+  },
+});
+
+export const postContribution = (contribution) => ({
+  type: ADD_CONTRIBUTION,
+  request: {
+    METHOD: POST_CONTRIBUTION.type,
+    ENDPOINT: POST_CONTRIBUTION.url,
+    PAYLOAD: { ...contribution },
+    HEADERS: {},
+  },
+});
+
+export const deleteContribution = (id) => ({
+  type: REMOVE_CONTRIBUTION,
+  request: {
+    METHOD: DELETE_CONTRIBUTION.type,
+    ENDPOINT: DELETE_CONTRIBUTION.url + `/${id}`,
     PAYLOAD: {},
     HEADERS: {},
   },
