@@ -2,6 +2,7 @@ import { FileUpload } from '@styled-icons/fa-solid';
 import React, { useState } from 'react';
 import { SemipolarLoading } from 'react-loadingg';
 import styled, { css } from 'styled-components';
+import { ThreeDots } from '@styled-icons/bootstrap/ThreeDots';
 
 const Container = styled.div`
   display: grid;
@@ -10,7 +11,6 @@ const Table = styled.table`
   display: grid;
   border-collapse: collapse;
   grid-template-columns:
-    minmax(150px, 1fr)
     minmax(150px, 1fr)
     minmax(150px, 1fr)
     minmax(150px, 1fr)
@@ -129,17 +129,17 @@ const LoaderContainer = styled.div`
   }
 `;
 
-const DocumentButton = styled.button`
+const DetailsButton = styled.button`
   place-content: center;
   cursor: pointer;
   outline: none;
   margin: 0 auto;
-  margin-top: -6px;
+  margin-top: -4px;
   display: grid;
   align-items: center;
   border: 1px solid hsl(214deg 100% 45%);
   width: min-content;
-  padding: 0.5em 1.8em;
+  padding: 0.5em 1em;
   border-radius: 10px;
   background: hsl(214deg 100% 45%);
   color: hsl(0, 0%, 100%);
@@ -193,13 +193,12 @@ export default function TableComponent({
               >
                 <td>{formatDate(contribution.createdAt)}</td>
                 <td>{contribution.legalName}</td>
-                <td>{contribution.legalName}</td>
                 <td>{contribution.country}</td>
                 <td>{contribution.city}</td>
                 <td>
-                  <DocumentButton>
-                    <FileUpload />
-                  </DocumentButton>
+                  <DetailsButton>
+                    <ThreeDots />
+                  </DetailsButton>
                 </td>
               </DataRow>
             ))

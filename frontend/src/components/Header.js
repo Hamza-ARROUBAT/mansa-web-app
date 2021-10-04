@@ -37,7 +37,7 @@ const StyledLink = styled(Link)`
 const LogoutButton = styled.button`
   cursor: pointer;
   display: grid;
-  grid-template-columns: max-content min-content;
+  grid-template-columns: min-content max-content;
   align-items: center;
   gap: 0 10px;
   padding: 1.5em 1em;
@@ -47,6 +47,7 @@ const LogoutButton = styled.button`
 
   p {
     margin: 0;
+    font-weight: bold;
     transition: color 0.2s;
   }
 
@@ -79,8 +80,8 @@ export default function Header() {
           dispatch(disconnectUser());
         }}
       >
-        <p>Log out</p>
         <LogOut />
+        <p>Log Out</p>
       </LogoutButton>
     </Nav>
   );

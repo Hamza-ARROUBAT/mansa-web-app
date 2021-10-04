@@ -15,6 +15,7 @@ export function* apiCall(action) {
       data: request.PAYLOAD,
     });
 
+
     yield put({
       type: typeCreator(type, successTag),
       payload: response,
