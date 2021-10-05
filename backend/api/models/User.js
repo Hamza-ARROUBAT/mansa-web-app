@@ -26,6 +26,43 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    company: {
+      legalName: {
+        type: String,
+        required: true,
+        sparse: true,
+      },
+      legalForm: {
+        type: String,
+        required: true,
+        sparse: true,
+      },
+      country: {
+        type: String,
+        default: false,
+        sparse: true,
+      },
+      city: {
+        type: String,
+        required: true,
+        sparse: true,
+      },
+      registredAddress: {
+        type: String,
+        required: true,
+        sparse: true,
+      },
+      telephone: {
+        type: String,
+        required: true,
+        sparse: true,
+      },
+      email: {
+        type: String,
+        required: true,
+        sparse: true,
+      },
+    },
     role: {
       type: String,
       required: true,

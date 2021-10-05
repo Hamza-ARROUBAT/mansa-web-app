@@ -258,6 +258,42 @@ export default function ManageUsers() {
           <p>Existing Users</p>
           <Border bWidth={140} />
         </TextContainer>
+        {/* {contributions.data.length > 0 ? (
+          <>
+            <TableComponent
+              header={['Sent Date', 'Legal Name', 'Country', 'City', 'Details']}
+              isLoading={contributions.isLoading}
+              data={contributions.data}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <ButtonsContainer>
+              <button
+                disabled={Object.keys(selected).length === 0}
+                onClick={handleClick}
+                type="button"
+              >
+                Accept
+              </button>
+              <button
+                disabled={Object.keys(selected).length === 0}
+                onClick={handleClick}
+                type="button"
+              >
+                Resend
+              </button>
+              <button
+                disabled={Object.keys(selected).length === 0}
+                onClick={handleClick}
+                type="button"
+              >
+                Reject
+              </button>
+            </ButtonsContainer>
+          </>
+        ) : (
+          <h2>No Contributions to verify</h2>
+        )} */}
       </InfosContainer>
     </Container>
   );
