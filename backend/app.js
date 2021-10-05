@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // database
 connectDB();
-²
+
 // routers
 const userRouter = require('./api/routers/userRouter');
 const contributionRouter = require('./api/routers/contributionRouter');
