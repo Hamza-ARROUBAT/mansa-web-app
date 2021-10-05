@@ -1,8 +1,5 @@
 const User = require('../models/User');
 const userService = require('../services/userService');
-// const cardService = require('../services/cardService');
-// const Product = require('../models/Product');
-// const Card = require('../models/Card');
 
 const fetch_all_users = (req, res) => {
   User.find()
