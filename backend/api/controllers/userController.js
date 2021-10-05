@@ -90,7 +90,6 @@ module.exports = {
   fetch_all_users,
   fetch_one_user,
   add_user,
-  add_second_user,
   auth_user,
   email_confirmed,
   is_first_time_login,

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import TextInput from 'components/TextInput';
+import { addUser, fetchAllUsers } from 'store/reducers/users/users.action';
+import { useDispatch, useSelector } from 'react-redux';
+import UsersTable from 'components/UsersTable';
 
 const Container = styled.div`
   display: grid;
@@ -40,32 +43,6 @@ const IdentificationForm = styled.form`
   margin: 2em 0;
 `;
 
-const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  margin-right: 25px;
-
-  button {
-    cursor: pointer;
-    padding: 0.7em 1em;
-    border-radius: 20px;
-    width: 170px;
-    text-transform: uppercase;
-    font-size: 15px;
-  }
-  button:nth-of-type(1) {
-    border: 1px solid hsl(214deg 100% 45%);
-    background-color: hsl(214deg 100% 45%);
-    color: #fdf5f0;
-    margin-left: 30px;
-    transition: background 0.3s, color 0.3s;
-    :hover {
-      background-color: #fff;
-      color: hsl(214deg 100% 45%);
-    }
-  }
-`;
 const TextInfo = styled.div`
   display: grid;
   p {
@@ -79,10 +56,72 @@ const Checkbox = styled.div`
   align-items: center;
   gap: 0 10px;
 `;
+
+const TableContainer = styled.div`
+  display: grid;
+  padding: 1em 0;
+  margin-bottom: 1em;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 5px;
+
+  button {
+    cursor: pointer;
+    margin-left: 15px;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-size: 15px;
+
+    :disabled {
+      cursor: default;
+      border: 1px solid hsl(0, 0%, 80%) !important;
+      background: hsl(0, 0%, 80%) !important;
+    }
+    :disabled:hover {
+      color: hsl(0, 0%, 100%) !important;
+    }
+  }
+
+  button:nth-of-type(1) {
+    border: 1px solid hsl(214deg 100% 45%);
+    background-color: hsl(214deg 100% 45%);
+    color: #fdf5f0;
+    transition: background 0.3s, color 0.3s;
+    :hover {
+      background-color: #fff;
+      color: hsl(214deg 100% 45%);
+    }
+  }
+  button:nth-of-type(2) {
+    border: 1px solid hsl(2, 65%, 55%);
+    background-color: hsl(2, 65%, 55%);
+    color: #fdf5f0;
+    transition: background 0.3s, color 0.3s;
+    :hover {
+      background-color: #fff;
+      color: hsl(2, 65%, 55%);
+    }
+  }
+`;
 export default function ManageUsers() {
+  const dispatch = useDispatch();
+
+  const users = useSelector((state) => state.users);
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, []);
+
+  console.log(users.data);
+
   const [initState, setInitState] = useState(true);
   const [maker, setMaker] = useState(false);
   const [checker, setChecker] = useState(false);
+  const user = useSelector((state) => state.user);
 
   const onSubmit = (data) => {
     let role = '';
@@ -98,10 +137,10 @@ export default function ManageUsers() {
       email: data.email,
       confirmEmail: data.confirmEmail,
       role,
+      company: user.data.company,
     };
 
-    console.log(formData);
-    // dispatch(postContribution(formData));
+    dispatch(addUser(formData));
     // window.location.reload();
   };
 
@@ -134,6 +173,13 @@ export default function ManageUsers() {
     mode: 'onBlur',
     resolver: yupResolver(schema),
   });
+
+  const [selected, setSelected] = useState({});
+
+  const handleClick = () => {
+    console.log(selected.id);
+    // dispatch(removeUser(selected.id));
+  };
 
   return (
     <Container>
@@ -258,42 +304,37 @@ export default function ManageUsers() {
           <p>Existing Users</p>
           <Border bWidth={140} />
         </TextContainer>
-        {/* {contributions.data.length > 0 ? (
+        {users.data.length > 0 ? (
           <>
-            <TableComponent
-              header={['Sent Date', 'Legal Name', 'Country', 'City', 'Details']}
-              isLoading={contributions.isLoading}
-              data={contributions.data}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            <TableContainer>
+              <UsersTable
+                header={['Name', 'Email', 'Company', 'Role', 'Status']}
+                isLoading={users.isLoading}
+                users={users.data}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </TableContainer>
             <ButtonsContainer>
               <button
                 disabled={Object.keys(selected).length === 0}
                 onClick={handleClick}
                 type="button"
               >
-                Accept
+                Resend Email
               </button>
               <button
                 disabled={Object.keys(selected).length === 0}
                 onClick={handleClick}
                 type="button"
               >
-                Resend
-              </button>
-              <button
-                disabled={Object.keys(selected).length === 0}
-                onClick={handleClick}
-                type="button"
-              >
-                Reject
+                Remove
               </button>
             </ButtonsContainer>
           </>
         ) : (
-          <h2>No Contributions to verify</h2>
-        )} */}
+          <h2>No Users</h2>
+        )}
       </InfosContainer>
     </Container>
   );

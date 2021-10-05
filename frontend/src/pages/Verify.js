@@ -26,9 +26,8 @@ const ButtonsContainer = styled.div`
   button {
     cursor: pointer;
     margin-left: 15px;
-    padding: 0.5em;
+    padding: 0.5em 1em;
     border-radius: 20px;
-    width: 120px;
     text-transform: uppercase;
     font-size: 15px;
 

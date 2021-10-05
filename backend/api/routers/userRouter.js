@@ -7,6 +7,7 @@ router.get('/all', userController.fetch_all_users);
 router.get('/:id', userController.fetch_one_user);
 
 router.post('/', userController.add_user);
+// router.delete('/:id', userController.remove_user);
 
 router.post('/auth', userController.auth_user);
 

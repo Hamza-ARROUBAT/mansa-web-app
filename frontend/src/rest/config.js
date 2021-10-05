@@ -6,13 +6,23 @@ const USERS_ROUTER = BASE_URL + '/users';
 const CONTRIBUTIONS_ROUTER = BASE_URL + '/contributions';
 
 // Controllers
-// ATHENTICATION_CONTROLLER
+// users
 export const POST_AUTH_USER = {
   url: USERS_ROUTER + '/auth',
   type: 'POST',
 };
 
-// CONTRIBUTIONS_CONTROLLER
+export const GET_ALL_USERS = {
+  url: USERS_ROUTER + '/all',
+  type: 'GET',
+};
+
+export const POST_ADD_USER = {
+  url: USERS_ROUTER + '/',
+  type: 'POST',
+};
+
+// contributions
 export const GET_ALL_CONTRIBUTIONS = {
   url: CONTRIBUTIONS_ROUTER + '/all',
   type: 'GET',

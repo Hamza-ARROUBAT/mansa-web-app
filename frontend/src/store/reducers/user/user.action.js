@@ -1,5 +1,5 @@
-import { POST_AUTH_USER } from 'rest/config';
-import { AUTH_USER, DISCONNECT_USER } from './user.types';
+import { POST_ADD_USER, POST_AUTH_USER } from 'rest/config';
+import { ADD_USER, AUTH_USER, DISCONNECT_USER } from './user.types';
 
 export const authUser = (credentials) => ({
   type: AUTH_USER,

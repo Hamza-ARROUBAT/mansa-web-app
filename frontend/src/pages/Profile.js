@@ -73,20 +73,25 @@ export default function Profile() {
           <Border bWidth={140} />
         </TextContainer>
         <InfoText>
-          <p>First Name :</p> <p>{userData.firstName}</p>
+          <p>Legal Name :</p> <p>{userData.company.legalName}</p>
         </InfoText>
         <InfoText>
-          <p>Last Name :</p> <p>{userData.lastName}</p>
+          <p>Legal Form :</p> <p>{userData.company.legalForm}</p>
         </InfoText>
         <InfoText>
-          <p>Email :</p> <p>{userData.email}</p>
+          <p>Country :</p> <p>{userData.company.country}</p>
         </InfoText>
         <InfoText>
-          <p>Email Confirmed :</p>{' '}
-          <p>{userData.isEmailConfirmed ? 'Yes' : 'No'}</p>
+          <p>City :</p> <p>{userData.company.city}</p>
         </InfoText>
         <InfoText>
-          <p>Role :</p> <p>{userData.role}</p>
+          <p>Registred Address :</p> <p>{userData.company.registredAddress}</p>
+        </InfoText>
+        <InfoText>
+          <p>Email :</p> <p>{userData.company.email}</p>
+        </InfoText>
+        <InfoText>
+          <p>Telephone :</p> <p>{userData.company.telephone}</p>
         </InfoText>
       </InfosContainer>
     </Container>
