@@ -22,6 +22,18 @@ const fetch_one_user = (req, res) => {
     });
 };
 
+const remove_user = (req, res) => {
+  const id = req.params.id;
+
+  User.findOneAndDelete({ id: id })
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 const auth_user = (req, res) => {
   const { username, password } = req.body;
   User.findOne({ 'credentials.username': username })
@@ -90,6 +102,7 @@ module.exports = {
   fetch_all_users,
   fetch_one_user,
   add_user,
+  remove_user,
   auth_user,
   email_confirmed,
   is_first_time_login,

@@ -4,7 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import TextInput from 'components/TextInput';
-import { addUser, fetchAllUsers } from 'store/reducers/users/users.action';
+import {
+  addUser,
+  fetchAllUsers,
+  removeUser,
+} from 'store/reducers/users/users.action';
 import { useDispatch, useSelector } from 'react-redux';
 import UsersTable from 'components/UsersTable';
 
@@ -141,6 +145,7 @@ export default function ManageUsers() {
     };
 
     dispatch(addUser(formData));
+    reset();
     // window.location.reload();
   };
 
@@ -167,7 +172,7 @@ export default function ManageUsers() {
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
@@ -177,8 +182,7 @@ export default function ManageUsers() {
   const [selected, setSelected] = useState({});
 
   const handleClick = () => {
-    console.log(selected.id);
-    // dispatch(removeUser(selected.id));
+    dispatch(removeUser(selected.id));
   };
 
   return (
@@ -318,7 +322,6 @@ export default function ManageUsers() {
             <ButtonsContainer>
               <button
                 disabled={Object.keys(selected).length === 0}
-                onClick={handleClick}
                 type="button"
               >
                 Resend Email

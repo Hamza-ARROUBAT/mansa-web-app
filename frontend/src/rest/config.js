@@ -22,6 +22,11 @@ export const POST_ADD_USER = {
   type: 'POST',
 };
 
+export const DELETE_USER = {
+  url: USERS_ROUTER,
+  type: 'DELETE',
+};
+
 // contributions
 export const GET_ALL_CONTRIBUTIONS = {
   url: CONTRIBUTIONS_ROUTER + '/all',

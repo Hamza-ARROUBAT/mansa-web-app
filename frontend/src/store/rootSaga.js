@@ -6,7 +6,11 @@ import {
   FETCH_ALL_CONTRIBUTIONS,
   REMOVE_CONTRIBUTION,
 } from './reducers/contributions/contributions.types';
-import { ADD_USER, FETCH_ALL_USERS } from './reducers/users/users.types';
+import {
+  ADD_USER,
+  FETCH_ALL_USERS,
+  REMOVE_USER,
+} from './reducers/users/users.types';
 
 function* rootSaga() {
   // user
@@ -15,6 +19,7 @@ function* rootSaga() {
   // users
   yield all([takeLatest(FETCH_ALL_USERS, apiCall)]);
   yield all([takeLatest(ADD_USER, apiCall)]);
+  yield all([takeLatest(REMOVE_USER, apiCall)]);
 
   // contributions
   yield all([takeLatest(FETCH_ALL_CONTRIBUTIONS, apiCall)]);

@@ -10,3 +10,7 @@ export const FETCH_ALL_USERS_ERROR = typeCreator(FETCH_ALL_USERS, errorTag);
 export const ADD_USER = 'ADD_USER';
 export const ADD_USER_SUCCESS = typeCreator(ADD_USER, successTag);
 export const ADD_USER_ERROR = typeCreator(ADD_USER, errorTag);
+
+export const REMOVE_USER = 'REMOVE_USER';
+export const REMOVE_USER_SUCCESS = typeCreator(REMOVE_USER, successTag);
+export const REMOVE_USER_ERROR = typeCreator(REMOVE_USER, errorTag);

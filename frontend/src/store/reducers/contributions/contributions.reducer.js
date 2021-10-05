@@ -30,12 +30,6 @@ const contributionsReducer = produce((draft, action) => {
 
     case REMOVE_CONTRIBUTION_SUCCESS:
       draft.isLoading = true;
-      console.log(currentDraft);
-      console.log(
-        currentDraft.data.filter(
-          (contribution) => contribution.id !== action.payload.data.id
-        )
-      );
       draft.data = currentDraft.data.filter(
         (contribution) => contribution.id !== action.payload.data.id
       );
