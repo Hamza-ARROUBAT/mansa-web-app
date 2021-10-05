@@ -104,6 +104,8 @@ export default function Contribute() {
       // }
 
       dispatch(postContribution(formData));
+      reset();
+
       // window.location.reload();
     }
   };
@@ -128,7 +130,7 @@ export default function Contribute() {
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
