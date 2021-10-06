@@ -72,6 +72,9 @@ const ButtonsContainer = styled.div`
   }
 `;
 
+const ContributionModal = styled.div``;
+const Modal = styled.div``;
+
 export default function Verify() {
   // fetch data
   const contributions = useSelector((state) => state.contributions);
@@ -85,6 +88,8 @@ export default function Verify() {
   const handleClick = () => {
     dispatch(deleteContribution(selected.id));
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   return (
     <Container>
@@ -123,6 +128,12 @@ export default function Verify() {
         </>
       ) : (
         <h3>No Contributions to verify</h3>
+      )}
+
+      {isModalOpen && (
+        <ContributionModal>
+          <Modal></Modal>
+        </ContributionModal>
       )}
     </Container>
   );

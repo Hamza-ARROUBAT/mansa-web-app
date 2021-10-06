@@ -10,13 +10,18 @@ export const contributorTabs = [
     path: '/contribute',
   },
   {
+    icon: 'Time',
+    name: 'Pending Contributions',
+    path: '/open-requests',
+  },
+  {
     icon: 'Inbox',
-    name: 'New Incoming Requests',
+    name: 'To-change Contributions',
     path: '/new-incoming-requests',
   },
   {
     icon: 'Done',
-    name: 'Completed Requests',
+    name: 'Accepted Contributions',
     path: '/completed-requests',
   },
   {
@@ -49,7 +54,7 @@ export const verifierTabs = [
   },
   {
     icon: 'Done',
-    name: 'Completed Requests',
+    name: 'Accepted Contributions',
     path: '/completed-requests',
   },
   {

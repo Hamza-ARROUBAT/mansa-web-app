@@ -172,7 +172,10 @@ export default function UsersTable({
   // };
 
   const data = users.filter(
-    (user) => user.role === 'maker' || user.role === 'checker'
+    (user) =>
+      user.role === 'maker' ||
+      user.role === 'checker' ||
+      user.role === 'maker, checker'
   );
 
   return (

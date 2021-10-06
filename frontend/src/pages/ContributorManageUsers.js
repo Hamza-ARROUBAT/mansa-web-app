@@ -133,12 +133,12 @@ export default function ManageUsers() {
 
   const onSubmit = (data) => {
     let role = '';
-    if (maker) {
+    if (maker && checker) {
+      role = 'maker, checker';
+    } else if (maker) {
       role = 'maker';
     } else if (checker) {
       role = 'checker';
-    } else if (maker && checker) {
-      role = 'maker, checker';
     }
 
     const formData = {
@@ -271,7 +271,7 @@ export default function ManageUsers() {
           <Border bWidth={140} />
         </TextContainer>
         {users.data.filter(
-          (user) => user.role === 'maker' || user.role === 'checker'
+          (user) => user.role === 'maker' || user.role === 'checker' || user.role === 'maker, checker'
         ).length > 0 && !user.data.isLoading ? (
           <>
             <TableContainer>
