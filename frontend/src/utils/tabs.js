@@ -20,11 +20,6 @@ export const contributorTabs = [
     path: '/completed-requests',
   },
   {
-    icon: 'Time',
-    name: 'Open Request',
-    path: '/open-requests',
-  },
-  {
     icon: 'Users',
     name: 'Manage Users',
     path: '/manage-users',
@@ -56,11 +51,6 @@ export const verifierTabs = [
     icon: 'Done',
     name: 'Completed Requests',
     path: '/completed-requests',
-  },
-  {
-    icon: 'Time',
-    name: 'Open Request',
-    path: '/open-requests',
   },
   {
     icon: 'Users',

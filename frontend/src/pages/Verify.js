@@ -12,7 +12,7 @@ const Container = styled.div`
   gap: 3em 0;
   padding: 0.25em 0;
 
-  h2 {
+  h3 {
     margin: 0 auto;
   }
 `;
@@ -122,7 +122,7 @@ export default function Verify() {
           </ButtonsContainer>
         </>
       ) : (
-        <h2>No Contributions to verify</h2>
+        <h3>No Contributions to verify</h3>
       )}
     </Container>
   );

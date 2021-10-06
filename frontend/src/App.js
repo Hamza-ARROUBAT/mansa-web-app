@@ -1,13 +1,14 @@
 import AppLayoutConnected from 'AppLayoutConnected';
 import AppLayoutDisconnected from 'AppLayoutDisconnected';
 import ChangePassword from 'pages/ChangePassword';
-import CompletedRequests from 'pages/CompletedRequests';
+import ContributorCompletedRequests from 'pages/ContributorCompletedRequests';
+import VerifierCompletedRequests from 'pages/VerifierCompletedRequests';
 import Contribute from 'pages/Contribute';
 import Login from 'pages/Login';
 import ContributorManageUsers from 'pages/ContributorManageUsers';
 import VerifierManageUsers from 'pages/VerifierManageUsers';
-import NewIncomingRequests from 'pages/NewIncomingRequests';
-import OpenRequests from 'pages/OpenRequests';
+import ContributorNewIncomingRequests from 'pages/ContributorNewIncomingRequests';
+import VerifierNewIncomingRequests from 'pages/VerifierNewIncomingRequests';
 import Profile from 'pages/Profile';
 import Verify from 'pages/Verify';
 import React from 'react';
@@ -34,6 +35,12 @@ export default function App() {
                 <Route exact path="/manage-users">
                   <ContributorManageUsers />
                 </Route>
+                <Route exact path="/new-incoming-requests">
+                  <ContributorNewIncomingRequests />
+                </Route>
+                <Route exact path="/completed-requests">
+                  <ContributorCompletedRequests />
+                </Route>
               </>
             )}
             {user.data.role === 'adminVerifier' && (
@@ -44,17 +51,14 @@ export default function App() {
                 <Route exact path="/manage-users">
                   <VerifierManageUsers />
                 </Route>
+                <Route exact path="/new-incoming-requests">
+                  <VerifierNewIncomingRequests />
+                </Route>
+                <Route exact path="/completed-requests">
+                  <VerifierCompletedRequests />
+                </Route>
               </>
             )}
-            <Route exact path="/new-incoming-requests">
-              <NewIncomingRequests />
-            </Route>
-            <Route exact path="/completed-requests">
-              <CompletedRequests />
-            </Route>
-            <Route exact path="/open-requests">
-              <OpenRequests />
-            </Route>
             <Route exact path="/change-password">
               <ChangePassword />
             </Route>
