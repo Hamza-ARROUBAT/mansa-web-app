@@ -90,8 +90,8 @@ const List = styled.ul`
 
 const ListItem = styled(NavLink)`
   display: grid;
-  grid-template-columns: max-content auto;
-  align-items: end;
+  grid-template-columns: max-content auto auto;
+  align-items: center;
   gap: 0 10px;
   border-bottom: 1px solid hsla(0, 0%, 0%, 10%);
   padding: 0.5em 1em;
@@ -132,6 +132,19 @@ const ListItem = styled(NavLink)`
         `};
 `;
 
+const NotifContainer = styled.div`
+  border-radius: 50%;
+  padding: 0.2em 0.38em;
+  background: hsl(2, 65%, 55%);
+  margin-left: 0.4em;
+
+  p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: hsl(0, 0%, 100%);
+  }
+`;
+
 // ContentContainer
 const ContentContainer = styled.div`
   padding: 4em 2em;
@@ -169,7 +182,6 @@ export default function AppLayout({ children }) {
   // tabs
   const user = useSelector((state) => state.user);
   const [tabs, setTabs] = useState([]);
-  console.log(user);
 
   useEffect(() => {
     if (user.data.role === 'Admin Contributor') {
@@ -232,6 +244,11 @@ export default function AppLayout({ children }) {
               >
                 {getIcon(tab.icon)}
                 <p>{tab.name}</p>
+                {tab.name === 'New Incoming Requests' && (
+                  <NotifContainer>
+                    <p>3</p>
+                  </NotifContainer>
+                )}
               </ListItem>
             ))}
           </List>
