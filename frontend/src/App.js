@@ -27,7 +27,7 @@ export default function App() {
             <Route exact path="/">
               <Profile />
             </Route>
-            {user.data.role === 'adminContributor' && (
+            {user.data.role === 'Admin Contributor' && (
               <>
                 <Route exact path="/contribute">
                   <Contribute />
@@ -43,7 +43,7 @@ export default function App() {
                 </Route>
               </>
             )}
-            {user.data.role === 'adminVerifier' && (
+            {user.data.role === 'Admin Verifier' && (
               <>
                 <Route exact path="/verify">
                   <Verify />

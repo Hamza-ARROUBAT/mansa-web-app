@@ -172,10 +172,10 @@ export default function AppLayout({ children }) {
   console.log(user);
 
   useEffect(() => {
-    if (user.data.role === 'adminContributor') {
+    if (user.data.role === 'Admin Contributor') {
       setTabs(contributorTabs);
       console.log(contributorTabs);
-    } else if (user.data.role === 'adminVerifier') {
+    } else if (user.data.role === 'Admin Verifier') {
       setTabs(verifierTabs);
     }
   }, [user.data.role]);

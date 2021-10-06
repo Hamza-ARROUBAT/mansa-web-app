@@ -16,7 +16,7 @@ export const contributorTabs = [
   },
   {
     icon: 'Inbox',
-    name: 'To-change Contributions',
+    name: 'Resended Contributions',
     path: '/new-incoming-requests',
   },
   {
