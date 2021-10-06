@@ -10,7 +10,7 @@ import {
   removeUser,
 } from 'store/reducers/users/users.action';
 import { useDispatch, useSelector } from 'react-redux';
-import UsersTable from 'components/UsersTable';
+import VerifierUsersTable from 'components/VerifierUsersTable';
 
 const Container = styled.div`
   display: grid;
@@ -120,33 +120,20 @@ export default function VerifierManageUser() {
     dispatch(fetchAllUsers());
   }, []);
 
-  console.log(users.data);
-
-  const [initState, setInitState] = useState(true);
-  const [maker, setMaker] = useState(false);
-  const [checker, setChecker] = useState(false);
   const user = useSelector((state) => state.user);
 
   const onSubmit = (data) => {
-    let role = '';
-    if (maker) {
-      role = 'maker';
-    } else if (checker) {
-      role = 'checker';
-    }
-
     const formData = {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       confirmEmail: data.confirmEmail,
-      role,
+      role: 'null',
       company: user.data.company,
     };
 
     dispatch(addUser(formData));
     reset();
-    // window.location.reload();
   };
 
   // form
@@ -221,80 +208,6 @@ export default function VerifierManageUser() {
             errorMessage={errors.confirmEmail}
             register={register}
           />
-          <TextInfo>
-            <p>Role</p>
-          </TextInfo>
-          {initState ? (
-            <>
-              <Checkbox>
-                <input
-                  type="checkbox"
-                  id="maker"
-                  name="role"
-                  checked={false}
-                  onChange={(e) => {
-                    setInitState(false);
-                    setMaker(e.target.value);
-                  }}
-                />
-                <label for="maker">Maker</label>
-              </Checkbox>
-              <Checkbox>
-                <input
-                  type="checkbox"
-                  id="checker"
-                  name="role"
-                  checked={false}
-                  onChange={(e) => {
-                    setInitState(false);
-                    setChecker(e.target.value);
-                  }}
-                />
-                <label for="checker">Checker</label>
-              </Checkbox>
-            </>
-          ) : (
-            <>
-              <Checkbox>
-                <input
-                  type="checkbox"
-                  id="maker"
-                  name="role"
-                  checked={maker}
-                  onChange={(e) => {
-                    const check = e.target.value;
-                    if (check) {
-                      setMaker(true);
-                      setChecker(false);
-                    } else {
-                      setMaker(false);
-                      setInitState(true);
-                    }
-                  }}
-                />
-                <label for="maker">Maker</label>
-              </Checkbox>
-              <Checkbox>
-                <input
-                  type="checkbox"
-                  id="checker"
-                  name="role"
-                  checked={checker}
-                  onChange={(e) => {
-                    const check = e.target.value;
-                    if (check) {
-                      setChecker(true);
-                      setMaker(false);
-                    } else {
-                      setChecker(false);
-                      setInitState(true);
-                    }
-                  }}
-                />
-                <label for="checker">Checker</label>
-              </Checkbox>
-            </>
-          )}
         </IdentificationForm>
         <ButtonsContainer>
           <button type="submit" form="form">
@@ -311,8 +224,8 @@ export default function VerifierManageUser() {
         {users.data.length > 0 ? (
           <>
             <TableContainer>
-              <UsersTable
-                header={['Name', 'Email', 'Company', 'Role', 'Status']}
+              <VerifierUsersTable
+                header={['Name', 'Email', 'Company', 'Status']}
                 isLoading={users.isLoading}
                 users={users.data}
                 selected={selected}

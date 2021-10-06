@@ -83,14 +83,13 @@ export default function Verify() {
   const [selected, setSelected] = useState({});
 
   const handleClick = () => {
-    console.log(selected.id);
     dispatch(deleteContribution(selected.id));
   };
 
   console.log(contributions.data.length);
   return (
     <Container>
-      {contributions.data.length > 0 ? (
+      {contributions.data.length > 0 && !contributions.isLoading ? (
         <>
           <TableComponent
             header={['Sent Date', 'Legal Name', 'Country', 'City', 'Details']}

@@ -104,7 +104,7 @@ export default function Contribute() {
       // }
 
       dispatch(postContribution(formData));
-      reset();
+      // reset();
 
       // window.location.reload();
     }

@@ -157,19 +157,23 @@ const DetailsButton = styled.button`
   }
 `;
 
-export default function TableComponent({
+export default function UsersTable({
   header,
   isLoading,
-  data,
+  users,
   selected,
   setSelected,
 }) {
   // formats
-  const formatDate = (fullDate) => {
-    const dateArray = fullDate.split('T')[0].split('-');
-    const formatedDate = dateArray.reverse().join('/');
-    return formatedDate;
-  };
+  // const formatDate = (fullDate) => {
+  //   const dateArray = fullDate.split('T')[0].split('-');
+  //   const formatedDate = dateArray.reverse().join('/');
+  //   return formatedDate;
+  // };
+
+  const data = users.filter(
+    (user) => user.role === 'maker' || user.role === 'checker'
+  );
 
   return (
     <Container>
@@ -182,27 +186,24 @@ export default function TableComponent({
           </tr>
         </TableHead>
         <TableBody>
-          {!isLoading && data.length !== 0 ? (
-            data.map((contribution, index) => (
+          {!isLoading ? (
+            data.map((user, index) => (
               <DataRow
                 key={index}
                 selected={
-                  Object.keys(selected).length !== 0 &&
-                  selected.id === contribution.id
+                  Object.keys(selected).length !== 0 && selected.id === user.id
                 }
                 onClick={() => {
-                  setSelected(contribution);
+                  setSelected(user);
                 }}
               >
-                <td>{contribution?.createdAt && formatDate(contribution.createdAt)}</td>
-                <td>{contribution?.legalName}</td>
-                <td>{contribution?.country}</td>
-                <td>{contribution?.city}</td>
                 <td>
-                  <DetailsButton>
-                    <ThreeDots />
-                  </DetailsButton>
+                  {user.firstName} {user.lastName}
                 </td>
+                <td>{user.email}</td>
+                <td>{user.company?.legalName}</td>
+                <td>{user.role}</td>
+                <td>{user.isEmailConfirmed ? 'Activated' : 'Pending'}</td>
               </DataRow>
             ))
           ) : (

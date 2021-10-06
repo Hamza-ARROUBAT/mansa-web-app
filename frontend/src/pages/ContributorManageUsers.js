@@ -10,7 +10,7 @@ import {
   removeUser,
 } from 'store/reducers/users/users.action';
 import { useDispatch, useSelector } from 'react-redux';
-import UsersTable from 'components/UsersTable';
+import ContributorUsersTable from 'components/ContributorUsersTable';
 
 const Container = styled.div`
   display: grid;
@@ -122,7 +122,6 @@ export default function ManageUsers() {
 
   console.log(users.data);
 
-  const [initState, setInitState] = useState(true);
   const [maker, setMaker] = useState(false);
   const [checker, setChecker] = useState(false);
   const user = useSelector((state) => state.user);
@@ -133,6 +132,8 @@ export default function ManageUsers() {
       role = 'maker';
     } else if (checker) {
       role = 'checker';
+    } else if (maker && checker) {
+      role = 'maker, checker';
     }
 
     const formData = {
@@ -221,83 +222,37 @@ export default function ManageUsers() {
             errorMessage={errors.confirmEmail}
             register={register}
           />
+
           <TextInfo>
             <p>Role</p>
           </TextInfo>
-          {initState ? (
-            <>
-              <Checkbox>
-                <input
-                  type="checkbox"
-                  id="maker"
-                  name="role"
-                  checked={false}
-                  onChange={(e) => {
-                    setInitState(false);
-                    setMaker(e.target.value);
-                  }}
-                />
-                <label for="maker">Maker</label>
-              </Checkbox>
-              <Checkbox>
-                <input
-                  type="checkbox"
-                  id="checker"
-                  name="role"
-                  checked={false}
-                  onChange={(e) => {
-                    setInitState(false);
-                    setChecker(e.target.value);
-                  }}
-                />
-                <label for="checker">Checker</label>
-              </Checkbox>
-            </>
-          ) : (
-            <>
-              <Checkbox>
-                <input
-                  type="checkbox"
-                  id="maker"
-                  name="role"
-                  checked={maker}
-                  onChange={(e) => {
-                    const check = e.target.value;
-                    if (check) {
-                      setMaker(true);
-                      setChecker(false);
-                    } else {
-                      setMaker(false);
-                      setInitState(true);
-                    }
-                  }}
-                />
-                <label for="maker">Maker</label>
-              </Checkbox>
-              <Checkbox>
-                <input
-                  type="checkbox"
-                  id="checker"
-                  name="role"
-                  checked={checker}
-                  onChange={(e) => {
-                    const check = e.target.value;
-                    if (check) {
-                      setChecker(true);
-                      setMaker(false);
-                    } else {
-                      setChecker(false);
-                      setInitState(true);
-                    }
-                  }}
-                />
-                <label for="checker">Checker</label>
-              </Checkbox>
-            </>
-          )}
+          <Checkbox>
+            <input
+              type="checkbox"
+              id="maker"
+              name="role"
+              checked={maker}
+              onChange={(e) => {
+                setMaker(!maker);
+              }}
+            />
+            <label for="maker">Maker</label>
+          </Checkbox>
+          <Checkbox>
+            <input
+              type="checkbox"
+              id="checker"
+              name="role"
+              checked={checker}
+              onChange={(e) => {
+                setChecker(!checker);
+              }}
+            />
+            <label for="checker">Checker</label>
+          </Checkbox>
         </IdentificationForm>
         <ButtonsContainer>
-          <button type="submit" form="form">
+          <button type="submit" form="form" disabled={!maker && !checker}>
             Create
           </button>
         </ButtonsContainer>
@@ -311,7 +266,7 @@ export default function ManageUsers() {
         {users.data.length > 0 ? (
           <>
             <TableContainer>
-              <UsersTable
+              <ContributorUsersTable
                 header={['Name', 'Email', 'Company', 'Role', 'Status']}
                 isLoading={users.isLoading}
                 users={users.data}

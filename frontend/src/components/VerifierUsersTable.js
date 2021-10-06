@@ -14,7 +14,6 @@ const Table = styled.table`
     minmax(150px, 1fr)
     minmax(150px, 1fr)
     minmax(150px, 1fr)
-    minmax(150px, 1fr)
     minmax(150px, 1fr);
   grid-template-rows: max-content auto;
   height: ${({ data }) => (data.length < 7 ? 'auto' : '345px')};
@@ -171,9 +170,7 @@ export default function UsersTable({
   //   return formatedDate;
   // };
 
-  const data = users.filter(
-    (user) => user.role === 'maker' || user.role === 'checker'
-  );
+  const data = users.filter((user) => user.role === 'null');
 
   return (
     <Container>
@@ -190,7 +187,9 @@ export default function UsersTable({
             data.map((user, index) => (
               <DataRow
                 key={index}
-                selected={selected.id === user.id}
+                selected={
+                  Object.keys(selected).length !== 0 && selected.id === user.id
+                }
                 onClick={() => {
                   setSelected(user);
                 }}
@@ -200,7 +199,6 @@ export default function UsersTable({
                 </td>
                 <td>{user.email}</td>
                 <td>{user.company?.legalName}</td>
-                <td>{user.role}</td>
                 <td>{user.isEmailConfirmed ? 'Activated' : 'Pending'}</td>
               </DataRow>
             ))
