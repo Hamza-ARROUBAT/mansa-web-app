@@ -17,7 +17,12 @@ const Container = styled.div`
   padding: 0.25em 0;
 `;
 
-const InfosContainer = styled.div``;
+const InfosContainer = styled.div`
+  h3 {
+    text-align: center;
+    margin: 2em 0;
+  }
+`;
 
 const TextContainer = styled.div`
   margin-bottom: 15px;
@@ -221,7 +226,7 @@ export default function VerifierManageUser() {
           <p>Existing Users</p>
           <Border bWidth={140} />
         </TextContainer>
-        {users.data.length > 0 ? (
+        {users.data.filter((user) => user.role === 'null').length > 0 ? (
           <>
             <TableContainer>
               <VerifierUsersTable
@@ -249,7 +254,7 @@ export default function VerifierManageUser() {
             </ButtonsContainer>
           </>
         ) : (
-          <h2>No Users</h2>
+          <h3>No Existing Users</h3>
         )}
       </InfosContainer>
     </Container>

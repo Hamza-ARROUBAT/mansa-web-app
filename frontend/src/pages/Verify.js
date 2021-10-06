@@ -86,7 +86,6 @@ export default function Verify() {
     dispatch(deleteContribution(selected.id));
   };
 
-  console.log(contributions.data.length);
   return (
     <Container>
       {contributions.data.length > 0 && !contributions.isLoading ? (

@@ -17,7 +17,12 @@ const Container = styled.div`
   padding: 0.25em 0;
 `;
 
-const InfosContainer = styled.div``;
+const InfosContainer = styled.div`
+  h3 {
+    margin: 2em 0;
+    text-align: center;
+  }
+`;
 
 const TextContainer = styled.div`
   margin-bottom: 15px;
@@ -186,6 +191,8 @@ export default function ManageUsers() {
     dispatch(removeUser(selected.id));
   };
 
+  console.log(users.data);
+
   return (
     <Container>
       <InfosContainer>
@@ -263,7 +270,9 @@ export default function ManageUsers() {
           <p>Existing Users</p>
           <Border bWidth={140} />
         </TextContainer>
-        {users.data.length > 0 ? (
+        {users.data.filter(
+          (user) => user.role === 'maker' || user.role === 'checker'
+        ).length > 0 && !user.data.isLoading ? (
           <>
             <TableContainer>
               <ContributorUsersTable
@@ -291,7 +300,7 @@ export default function ManageUsers() {
             </ButtonsContainer>
           </>
         ) : (
-          <h2>No Users</h2>
+          <h3>No Existing Users</h3>
         )}
       </InfosContainer>
     </Container>
