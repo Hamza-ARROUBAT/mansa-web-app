@@ -36,6 +36,10 @@ export const POST_CONTRIBUTION = {
   url: CONTRIBUTIONS_ROUTER,
   type: 'POST',
 };
+export const PUT_CONTRIBUTION = {
+  url: CONTRIBUTIONS_ROUTER,
+  type: 'PUT',
+};
 export const DELETE_CONTRIBUTION = {
   url: CONTRIBUTIONS_ROUTER,
   type: 'DELETE',

@@ -1,11 +1,13 @@
 import {
-  ADD_CONTRIBUTION,
   FETCH_ALL_CONTRIBUTIONS,
+  ADD_CONTRIBUTION,
+  CHANGE_CONTRIBUTION,
   REMOVE_CONTRIBUTION,
 } from './contributions.types';
 import {
   DELETE_CONTRIBUTION,
   GET_ALL_CONTRIBUTIONS,
+  PUT_CONTRIBUTION,
   POST_CONTRIBUTION,
 } from 'rest/config';
 
@@ -25,6 +27,16 @@ export const postContribution = (contribution) => ({
     METHOD: POST_CONTRIBUTION.type,
     ENDPOINT: POST_CONTRIBUTION.url,
     PAYLOAD: { ...contribution },
+    HEADERS: {},
+  },
+});
+
+export const changeContribution = (contribution) => ({
+  type: CHANGE_CONTRIBUTION,
+  request: {
+    METHOD: PUT_CONTRIBUTION.type,
+    ENDPOINT: PUT_CONTRIBUTION.url,
+    PAYLOAD: { contribution },
     HEADERS: {},
   },
 });

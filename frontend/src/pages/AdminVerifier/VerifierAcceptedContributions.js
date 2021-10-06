@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function VerifierCompletedRequests() {
+export default function VerifierAcceptedContributions() {
   return (
     <div>
       verif

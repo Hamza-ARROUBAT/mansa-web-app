@@ -1,16 +1,16 @@
 import AppLayoutConnected from 'AppLayoutConnected';
 import AppLayoutDisconnected from 'AppLayoutDisconnected';
 import ChangePassword from 'pages/ChangePassword';
-import ContributorCompletedRequests from 'pages/ContributorCompletedRequests';
-import VerifierCompletedRequests from 'pages/VerifierCompletedRequests';
-import Contribute from 'pages/Contribute';
+import ContributorAcceptedContributions from 'pages/AdminContributor/ContributorAcceptedContributions';
+import VerifierAcceptedContributions from 'pages/AdminVerifier/VerifierAcceptedContributions';
+import Contribute from 'pages/AdminContributor/Contribute';
 import Login from 'pages/Login';
-import ContributorManageUsers from 'pages/ContributorManageUsers';
-import VerifierManageUsers from 'pages/VerifierManageUsers';
-import ContributorNewIncomingRequests from 'pages/ContributorNewIncomingRequests';
-import VerifierNewIncomingRequests from 'pages/VerifierNewIncomingRequests';
+import ContributorManageUsers from 'pages/AdminContributor/ContributorManageUsers';
+import VerifierManageUsers from 'pages/AdminVerifier/VerifierManageUsers';
+import ContributorResendedContributions from 'pages/AdminContributor/ContributorResendedContributions';
+import VerifierNewIncomingRequests from 'pages/AdminVerifier/VerifierNewIncomingRequests';
 import Profile from 'pages/Profile';
-import Verify from 'pages/Verify';
+import Verify from 'pages/AdminVerifier/Verify';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router';
@@ -36,10 +36,10 @@ export default function App() {
                   <ContributorManageUsers />
                 </Route>
                 <Route exact path="/new-incoming-requests">
-                  <ContributorNewIncomingRequests />
+                  <ContributorResendedContributions />
                 </Route>
                 <Route exact path="/completed-requests">
-                  <ContributorCompletedRequests />
+                  <ContributorAcceptedContributions />
                 </Route>
               </>
             )}
@@ -55,7 +55,7 @@ export default function App() {
                   <VerifierNewIncomingRequests />
                 </Route>
                 <Route exact path="/completed-requests">
-                  <VerifierCompletedRequests />
+                  <VerifierAcceptedContributions />
                 </Route>
               </>
             )}

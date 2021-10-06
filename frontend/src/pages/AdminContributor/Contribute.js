@@ -95,6 +95,7 @@ export default function Contribute() {
         telephone: data.telephone,
         // Aml Questionaire
         documentFile: data.documentFile[0],
+        status: "pending"
       };
 
       // const formDataReq = new FormData();

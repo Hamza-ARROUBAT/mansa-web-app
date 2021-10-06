@@ -44,6 +44,11 @@ const contributionSchema = new Schema(
       required: true,
       sparse: true,
     },
+    status: {
+      type: String,
+      required: true,
+      sparse: true,
+    },
   },
   { timestamps: true }
 );
