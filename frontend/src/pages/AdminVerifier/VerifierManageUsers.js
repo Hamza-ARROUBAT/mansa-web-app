@@ -232,7 +232,7 @@ export default function VerifierManageUser() {
               <VerifierUsersTable
                 header={['Name', 'Email', 'Company', 'Status']}
                 isLoading={users.isLoading}
-                users={users.data}
+                users={users.data.filter((user) => user.role === 'null')}
                 selected={selected}
                 setSelected={setSelected}
               />

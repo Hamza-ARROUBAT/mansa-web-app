@@ -7,7 +7,11 @@ import FileInput from 'components/FileInput';
 import TextInput from 'components/TextInput';
 import SelectInput from 'components/SelectInput';
 import { useDispatch } from 'react-redux';
-import { postContribution } from 'store/reducers/contributions/contributions.action';
+import {
+  getAllContributions,
+  postContribution,
+} from 'store/reducers/contributions/contributions.action';
+import { useHistory } from 'react-router';
 
 const Container = styled.div`
   display: grid;
@@ -78,6 +82,8 @@ export default function Contribute() {
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
+  let history = useHistory();
+
   const onSubmit = (data) => {
     if (
       legalForm !== undefined &&
@@ -95,7 +101,7 @@ export default function Contribute() {
         telephone: data.telephone,
         // Aml Questionaire
         documentFile: data.documentFile[0],
-        status: "pending"
+        status: 'pending',
       };
 
       // const formDataReq = new FormData();
@@ -105,6 +111,10 @@ export default function Contribute() {
       // }
 
       dispatch(postContribution(formData));
+      setTimeout(() => {
+        history.push('/pending-contributions');
+      }, 500);
+
       // reset();
 
       // window.location.reload();
