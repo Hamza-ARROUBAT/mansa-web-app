@@ -1,4 +1,4 @@
-import { all, takeLatest } from '@redux-saga/core/effects';
+import { all, takeEvery, takeLatest } from '@redux-saga/core/effects';
 import { apiCall } from 'api/apiCall';
 import { AUTH_USER } from './reducers/user/user.types';
 import {
@@ -20,7 +20,7 @@ function* rootSaga() {
   // users
   yield all([takeLatest(FETCH_ALL_USERS, apiCall)]);
   yield all([takeLatest(ADD_USER, apiCall)]);
-  yield all([takeLatest(CHANGE_CONTRIBUTION, apiCall)]);
+  yield all([takeEvery(CHANGE_CONTRIBUTION, apiCall)]);
   yield all([takeLatest(REMOVE_USER, apiCall)]);
 
   // contributions

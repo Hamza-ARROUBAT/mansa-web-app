@@ -10,8 +10,9 @@ import { Done } from '@styled-icons/material/Done';
 import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
 import Header from 'components/Header';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { contributorTabs, verifierTabs } from 'utils/tabs';
+import { getAllContributions } from 'store/reducers/contributions/contributions.action';
 // import Logo from 'assets/images/svg/icons/logo.svg';
 // import { SemipolarLoading } from 'react-loadingg';
 
@@ -181,7 +182,14 @@ export default function AppLayout({ children }) {
 
   // tabs
   const user = useSelector((state) => state.user);
+  const contributions = useSelector((state) => state.contributions);
+
   const [tabs, setTabs] = useState([]);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllContributions());
+  }, []);
 
   useEffect(() => {
     if (user.data.role === 'Admin Contributor') {
@@ -246,7 +254,13 @@ export default function AppLayout({ children }) {
                 <p>{tab.name}</p>
                 {tab.name === 'New Incoming Requests' && (
                   <NotifContainer>
-                    <p>3</p>
+                    <p>
+                      {
+                        contributions.data.filter(
+                          (contribution) => contribution.status === 'pending'
+                        ).length
+                      }
+                    </p>
                   </NotifContainer>
                 )}
               </ListItem>

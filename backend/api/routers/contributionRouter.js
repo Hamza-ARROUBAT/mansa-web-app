@@ -7,6 +7,8 @@ router.get('/all', contributionController.fetch_all_contributions);
 
 router.post('/', contributionController.add_contribution);
 
+router.put('/', contributionController.change_contribution);
+
 router.delete('/:id', contributionController.delete_contribution);
 
 module.exports = router;
