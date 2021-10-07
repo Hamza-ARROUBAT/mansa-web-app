@@ -66,6 +66,7 @@ export default function VerifierNewIncomingRequests() {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(getAllContributions());
     setChangedContributions(
       contributions.data.filter(
         (contribution) => contribution.status === 'pending'
@@ -77,7 +78,6 @@ export default function VerifierNewIncomingRequests() {
     if (changedContributions.length > 0) {
       changedContributions.forEach((contribution) => {
         const changed = { ...contribution, status: 'to verify' };
-        console.log(changed);
         dispatch(changeContribution(changed));
       });
     }
@@ -90,9 +90,6 @@ export default function VerifierNewIncomingRequests() {
   };
 
   const [isModalOpen, setIsModalOpen] = useState(true);
-
-  console.log(changedContributions);
-  console.log(changedContributions);
 
   return (
     <Container>
@@ -109,7 +106,7 @@ export default function VerifierNewIncomingRequests() {
               'Legal Name',
               'Legal Form',
               'Country',
-              'City',
+              'Details',
             ]}
             isLoading={contributions.isLoading}
             data={changedContributions}

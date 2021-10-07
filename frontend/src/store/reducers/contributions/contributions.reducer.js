@@ -25,7 +25,7 @@ const contributionsReducer = produce((draft, action) => {
 
     case ADD_CONTRIBUTION_SUCCESS:
       draft.isLoading = true;
-      draft.data = [...currentDraft.data, action.payload.contribution];
+      draft.data = [...currentDraft.data, action.payload.data];
       draft.isLoading = false;
       break;
 

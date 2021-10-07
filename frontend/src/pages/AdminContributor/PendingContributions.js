@@ -58,37 +58,42 @@ const ButtonsContainer = styled.div`
 const ContributionModal = styled.div``;
 const Modal = styled.div``;
 
-export default function VerifierAcceptedContributions() {
+export default function PendingContributions() {
   // fetch data
   const contributions = useSelector((state) => state.contributions);
+
+  const [changedContributions, setChangedContributions] = useState([]);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllContributions());
+    setChangedContributions(
+      contributions.data.filter(
+        (contribution) =>
+          contribution?.status === 'to verify' ||
+          contribution?.status === 'pending'
+      )
+    );
   }, []);
 
   const [selected, setSelected] = useState({});
 
-  const handleClick = () => {};
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   return (
     <Container>
-      {contributions.data.filter(
-        (contribution) => contribution.status === 'accepted'
-      ).length > 0 && !contributions.isLoading ? (
-        <UnhandledContributions
-          header={['Sent Date', 'Legal Name', 'Country', 'City', 'Details']}
-          isLoading={contributions.isLoading}
-          data={contributions.data.filter(
-            (contribution) => contribution.status === 'accepted'
-          )}
-          selected={selected}
-          setSelected={setSelected}
-        />
+      {changedContributions.length > 0 && !contributions.isLoading ? (
+        <>
+          <TableComponent
+            header={['Sent Date', 'Legal Name', 'Country', 'City', 'Details']}
+            isLoading={contributions.isLoading}
+            data={changedContributions}
+            selected={selected}
+            setSelected={setSelected}
+          />
+        </>
       ) : (
-        <h3>No accepted contributions</h3>
+        <h3>No New Incoming Requests</h3>
       )}
 
       {isModalOpen && (

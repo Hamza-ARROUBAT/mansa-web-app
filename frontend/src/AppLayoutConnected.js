@@ -90,12 +90,17 @@ const List = styled.ul`
 `;
 
 const ListItem = styled(NavLink)`
+  cursor: pointer;
   display: grid;
-  grid-template-columns: max-content auto auto;
+  grid-template-columns: max-content auto max-content;
   align-items: center;
   gap: 0 10px;
   border-bottom: 1px solid hsla(0, 0%, 0%, 10%);
   padding: 0.5em 1em;
+
+  :hover {
+    background: hsla(0, 0%, 0%, 8%);
+  }
 
   svg {
     width: 20px;
@@ -108,35 +113,35 @@ const ListItem = styled(NavLink)`
     margin: 0;
   }
 
-  ${({ active }) =>
-    active
-      ? css`
-          transition: background 0.2s;
-          background: hsl(214deg 100% 45%);
+  &.active {
+    transition: background 0.2s;
+    background: hsl(214deg 100% 45%);
 
-          svg {
-            transition: color 0.2s;
-            width: 20px;
-            color: hsl(0, 0%, 100%);
-          }
-          p {
-            transition: color 0.2s;
-            color: hsl(0, 0%, 100%);
-          }
-        `
-      : css`
-          cursor: pointer;
+    svg {
+      transition: color 0.2s;
+      width: 20px;
+      color: hsl(0, 0%, 100%);
+    }
+    p {
+      transition: color 0.2s;
+      color: hsl(0, 0%, 100%);
+    }
 
-          :hover {
-            background: hsla(0, 0%, 0%, 8%);
-          }
-        `};
+    div {
+      background: ${(props) => props.isBlue && 'hsl(0,0%,95%)'};
+
+      p {
+        color: ${(props) => props.isBlue && 'hsl(214deg 100% 45%)'};
+      }
+    }
+  }
 `;
 
 const NotifContainer = styled.div`
+  align-self: end;
   border-radius: 50%;
-  padding: 0.2em 0.38em;
-  background: hsl(2, 65%, 55%);
+  padding: 0.2em 0.4em;
+  background: ${(props) => props.background};
   margin-left: 0.4em;
 
   p {
@@ -225,6 +230,23 @@ export default function AppLayout({ children }) {
         return;
     }
   };
+
+  const getColor = (tabName) => {
+    switch (tabName) {
+      case 'New Incoming Requests':
+        return 'hsl(2, 65%, 55%)';
+      case 'Pending Contributions':
+        return 'hsl(214deg 100% 45%)';
+      case 'Resended Contributions':
+        return 'hsl(2, 65%, 55%)';
+      case 'Accepted Contributions':
+        return 'hsl(167, 71%, 47%)';
+
+      default:
+        return 'black';
+    }
+  };
+
   return tabs.length !== 0 ? (
     <Container>
       <Header />
@@ -244,25 +266,67 @@ export default function AppLayout({ children }) {
           <List>
             {tabs.map((tab, index) => (
               <ListItem
-                active={activeTab === index}
+                exact
+                to={tab.path}
+                isBlue={tab.name === 'Pending Contributions'}
                 onClick={() => {
                   setActiveTab(index);
                 }}
-                to={tab.path}
               >
                 {getIcon(tab.icon)}
                 <p>{tab.name}</p>
-                {tab.name === 'New Incoming Requests' && (
-                  <NotifContainer>
-                    <p>
-                      {
-                        contributions.data.filter(
-                          (contribution) => contribution.status === 'pending'
-                        ).length
-                      }
-                    </p>
-                  </NotifContainer>
-                )}
+                {tab.name === 'Pending Contributions' &&
+                  !contributions.isLoading && (
+                    <NotifContainer background={getColor(tab.name)}>
+                      <p>
+                        {
+                          contributions.data.filter(
+                            (contribution) =>
+                              contribution?.status === 'to verify' ||
+                              contribution?.status === 'pending'
+                          ).length
+                        }
+                      </p>
+                    </NotifContainer>
+                  )}
+                {tab.name === 'New Incoming Requests' &&
+                  !contributions.isLoading && (
+                    <NotifContainer background={getColor(tab.name)}>
+                      <p>
+                        {
+                          contributions.data.filter(
+                            (contribution) => contribution?.status === 'pending'
+                          ).length
+                        }
+                      </p>
+                    </NotifContainer>
+                  )}
+                {tab.name === 'Resended Contributions' &&
+                  !contributions.isLoading && (
+                    <NotifContainer background={getColor(tab.name)}>
+                      <p>
+                        {
+                          contributions.data.filter(
+                            (contribution) =>
+                              contribution?.status === 'resended'
+                          ).length
+                        }
+                      </p>
+                    </NotifContainer>
+                  )}
+                {tab.name === 'Accepted Contributions' &&
+                  !contributions.isLoading && (
+                    <NotifContainer background={getColor(tab.name)}>
+                      <p>
+                        {
+                          contributions.data.filter(
+                            (contribution) =>
+                              contribution?.status === 'accepted'
+                          ).length
+                        }
+                      </p>
+                    </NotifContainer>
+                  )}
               </ListItem>
             ))}
           </List>

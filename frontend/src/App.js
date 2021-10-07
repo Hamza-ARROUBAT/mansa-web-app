@@ -2,6 +2,7 @@ import AppLayoutConnected from 'AppLayoutConnected';
 import AppLayoutDisconnected from 'AppLayoutDisconnected';
 import ChangePassword from 'pages/ChangePassword';
 import ContributorAcceptedContributions from 'pages/AdminContributor/ContributorAcceptedContributions';
+import PendingContributions from 'pages/AdminContributor/PendingContributions';
 import VerifierAcceptedContributions from 'pages/AdminVerifier/VerifierAcceptedContributions';
 import Contribute from 'pages/AdminContributor/Contribute';
 import Login from 'pages/Login';
@@ -35,10 +36,13 @@ export default function App() {
                 <Route exact path="/manage-users">
                   <ContributorManageUsers />
                 </Route>
-                <Route exact path="/new-incoming-requests">
+                <Route exact path="/pending-contributions">
+                  <PendingContributions />
+                </Route>
+                <Route exact path="/resended-contributions">
                   <ContributorResendedContributions />
                 </Route>
-                <Route exact path="/completed-requests">
+                <Route exact path="/accepted-contributions">
                   <ContributorAcceptedContributions />
                 </Route>
               </>
@@ -54,7 +58,7 @@ export default function App() {
                 <Route exact path="/new-incoming-requests">
                   <VerifierNewIncomingRequests />
                 </Route>
-                <Route exact path="/completed-requests">
+                <Route exact path="/accepted-contributions">
                   <VerifierAcceptedContributions />
                 </Route>
               </>

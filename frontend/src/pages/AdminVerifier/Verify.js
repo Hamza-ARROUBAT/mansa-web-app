@@ -2,6 +2,7 @@ import TableComponent from 'components/TableComponent';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  changeContribution,
   deleteContribution,
   getAllContributions,
 } from 'store/reducers/contributions/contributions.action';
@@ -78,48 +79,77 @@ const Modal = styled.div``;
 export default function Verify() {
   // fetch data
   const contributions = useSelector((state) => state.contributions);
+  const [changedContributions, setChangedContributions] = useState([]);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllContributions());
+    setChangedContributions(
+      contributions.data.filter(
+        (contribution) =>
+          contribution.status === 'pending' ||
+          contribution.status === 'to verify'
+      )
+    );
   }, []);
 
   const [selected, setSelected] = useState({});
 
-  const handleClick = () => {
+  const handleAccept = () => {
+    const newContribution = { ...selected, status: 'accepted' };
+    dispatch(changeContribution(newContribution));
+    setSelected({});
+  };
+
+  const handleResend = () => {
+    const newContribution = { ...selected, status: 'resended' };
+    dispatch(changeContribution(newContribution));
+    setSelected({});
+  };
+  const handleReject = () => {
     dispatch(deleteContribution(selected.id));
+    setSelected({});
   };
 
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   return (
     <Container>
-      {contributions.data.length > 0 && !contributions.isLoading ? (
+      {contributions.data.filter(
+        (contribution) =>
+          contribution.status === 'pending' ||
+          contribution.status === 'to verify'
+      ).length > 0 && !contributions.isLoading ? (
         <>
           <TableComponent
             header={['Sent Date', 'Legal Name', 'Country', 'City', 'Details']}
             isLoading={contributions.isLoading}
-            data={contributions.data}
+            data={contributions.data.filter(
+              (contribution) =>
+                contribution.status === 'pending' ||
+                contribution.status === 'to verify'
+            )}
             selected={selected}
             setSelected={setSelected}
           />
           <ButtonsContainer>
             <button
               disabled={Object.keys(selected).length === 0}
-              onClick={handleClick}
+              onClick={handleAccept}
               type="button"
             >
               Accept
             </button>
             <button
               disabled={Object.keys(selected).length === 0}
-              onClick={handleClick}
+              onClick={handleResend}
               type="button"
             >
               Resend
             </button>
             <button
               disabled={Object.keys(selected).length === 0}
-              onClick={handleClick}
+              onClick={handleReject}
               type="button"
             >
               Reject

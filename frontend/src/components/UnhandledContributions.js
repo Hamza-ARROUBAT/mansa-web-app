@@ -43,7 +43,13 @@ const Table = styled.table`
   tr {
     display: contents;
   }
+  th:last-child {
+    text-align: center;
+  }
 
+  td:last-child {
+    text-align: center;
+  }
   th,
   td {
     overflow: hidden;
@@ -70,7 +76,6 @@ const Table = styled.table`
   th {
     text-align: left;
   }
-
 
   tbody {
     align-items: flex-start;
@@ -183,8 +188,7 @@ export default function UnhandledContributions({
                   Object.keys(selected).length !== 0 &&
                   selected.id === contribution.id
                 }
-                onClick={() => {
-                }}
+                onClick={() => {}}
               >
                 <td>
                   {contribution?.createdAt &&
@@ -193,7 +197,11 @@ export default function UnhandledContributions({
                 <td>{contribution?.legalName}</td>
                 <td>{contribution?.legalForm}</td>
                 <td>{contribution?.country}</td>
-                <td>{contribution?.city}</td>
+                <td>
+                  <DetailsButton>
+                    <ThreeDots />
+                  </DetailsButton>
+                </td>
               </DataRow>
             ))
           ) : (
