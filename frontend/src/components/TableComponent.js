@@ -163,6 +163,7 @@ export default function TableComponent({
   data,
   selected,
   setSelected,
+  setIsModalOpen,
 }) {
   // formats
   const formatDate = (fullDate) => {
@@ -194,12 +195,19 @@ export default function TableComponent({
                   setSelected(contribution);
                 }}
               >
-                <td>{contribution?.createdAt && formatDate(contribution.createdAt)}</td>
+                <td>
+                  {contribution?.createdAt &&
+                    formatDate(contribution.createdAt)}
+                </td>
                 <td>{contribution?.legalName}</td>
                 <td>{contribution?.country}</td>
                 <td>{contribution?.city}</td>
                 <td>
-                  <DetailsButton>
+                  <DetailsButton
+                    onClick={() => {
+                      setIsModalOpen(true);
+                    }}
+                  >
                     <ThreeDots />
                   </DetailsButton>
                 </td>

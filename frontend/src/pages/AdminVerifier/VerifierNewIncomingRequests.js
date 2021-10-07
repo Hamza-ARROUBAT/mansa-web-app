@@ -1,3 +1,4 @@
+import ContributionModal from 'components/ContributionModal';
 import TableComponent from 'components/TableComponent';
 import UnhandledContributions from 'components/UnhandledContributions';
 import React, { useEffect, useState } from 'react';
@@ -54,55 +55,6 @@ const ButtonsContainer = styled.div`
       color: hsl(214deg 100% 45%);
     }
   }
-`;
-
-const ContributionModal = styled.div`
-  display: grid;
-  place-content: center;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  overflow: auto;
-  background: hsla(0, 0%, 0%, 40%);
-`;
-const Modal = styled.div`
-  display: grid;
-  grid-template-rows: max-content auto;
-  grid-template-columns: 1fr 1fr;
-  border-radius: 10px;
-  background: hsl(0, 0%, 100%);
-`;
-
-const InfosContainer = styled.div``;
-
-const TextContainer = styled.div`
-  margin-bottom: 15px;
-  p {
-    text-transform: capitalize;
-    white-space: nowrap;
-    margin: 0;
-    font-size: 1.2rem;
-    color: hsl(0, 0%, 50%);
-    font-weight: 600;
-  }
-`;
-const InfoText = styled.div`
-  display: grid;
-  grid-template-columns: max-content max-content;
-  gap: 0 10px;
-
-  p:nth-child(2n + 1) {
-    font-weight: bold;
-  }
-`;
-const Border = styled.div`
-  background-color: hsl(214deg 100% 45%);
-  height: 1.5px;
-  margin-left: 2px;
-  border-radius: 20px;
-  width: ${(props) => props.bWidth}px;
 `;
 
 export default function VerifierNewIncomingRequests() {
@@ -166,39 +118,7 @@ export default function VerifierNewIncomingRequests() {
         <h3>No New Incoming Requests</h3>
       )}
 
-      {isModalOpen && (
-        <ContributionModal>
-          <Modal>
-            <InfosContainer>
-              <TextContainer>
-                <p>Company Infos</p>
-                <Border bWidth={140} />
-              </TextContainer>
-              <InfoText>
-                <p>Legal Name :</p> <p>{selected.legalName}</p>
-              </InfoText>
-              <InfoText>
-                <p>Legal Form :</p> <p>{selected.legalForm}</p>
-              </InfoText>
-              <InfoText>
-                <p>Country :</p> <p>{selected.country}</p>
-              </InfoText>
-              <InfoText>
-                <p>City :</p> <p>{selected.city}</p>
-              </InfoText>
-              <InfoText>
-                <p>Registred Address :</p> <p>{selected.registredAddress}</p>
-              </InfoText>
-              <InfoText>
-                <p>Email :</p> <p>{selected.email}</p>
-              </InfoText>
-              <InfoText>
-                <p>Telephone :</p> <p>{selected.telephone}</p>
-              </InfoText>
-            </InfosContainer>
-          </Modal>
-        </ContributionModal>
-      )}
+      {isModalOpen && <ContributionModal />}
     </Container>
   );
 }

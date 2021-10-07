@@ -8,10 +8,11 @@ import TextInput from 'components/TextInput';
 import SelectInput from 'components/SelectInput';
 import { useDispatch } from 'react-redux';
 import {
+  deleteContribution,
   getAllContributions,
   postContribution,
 } from 'store/reducers/contributions/contributions.action';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 
 const Container = styled.div`
   display: grid;
@@ -74,13 +75,29 @@ const IdentificationForm = styled.form`
 
 export default function Contribute() {
   const dispatch = useDispatch();
+  let location = useLocation();
 
+  const data = location.state?.modifiedContribution;
+  console.log(data);
   // Select inputs
   const [legalForm, setLegalForm] = useState();
   const [city, setCity] = useState();
   const [country, setCountry] = useState();
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      setValue('legalName', data.legalName);
+      setLegalForm(data.legalForm);
+      setCity(data.city);
+      setCountry(data.country);
+      setValue('registredAddress', data.registredAddress);
+      setValue('email', data.email);
+      setValue('telephone', data.telephone);
+      dispatch(deleteContribution(data.id));
+    }
+  }, []);
 
   let history = useHistory();
 
@@ -141,7 +158,7 @@ export default function Contribute() {
   const {
     register,
     handleSubmit,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',

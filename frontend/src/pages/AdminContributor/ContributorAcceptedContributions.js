@@ -92,9 +92,10 @@ export default function ContributorAcceptedContributions() {
       )}
 
       {isModalOpen && (
-        <ContributionModal>
-          <Modal></Modal>
-        </ContributionModal>
+        <ContributionModal
+          setIsModalOpen={setIsModalOpen}
+          selected={selected}
+        />
       )}
     </Container>
   );

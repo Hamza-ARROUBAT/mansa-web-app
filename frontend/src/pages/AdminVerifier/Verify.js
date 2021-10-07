@@ -1,3 +1,4 @@
+import ContributionModal from 'components/ContributionModal';
 import TableComponent from 'components/TableComponent';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -73,9 +74,6 @@ const ButtonsContainer = styled.div`
   }
 `;
 
-const ContributionModal = styled.div``;
-const Modal = styled.div``;
-
 export default function Verify() {
   // fetch data
   const contributions = useSelector((state) => state.contributions);
@@ -111,7 +109,7 @@ export default function Verify() {
     setSelected({});
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <Container>
@@ -131,6 +129,7 @@ export default function Verify() {
             )}
             selected={selected}
             setSelected={setSelected}
+            setIsModalOpen={setIsModalOpen}
           />
           <ButtonsContainer>
             <button
@@ -160,11 +159,7 @@ export default function Verify() {
         <h3>No Contributions to verify</h3>
       )}
 
-      {isModalOpen && (
-        <ContributionModal>
-          <Modal></Modal>
-        </ContributionModal>
-      )}
+      {isModalOpen && <ContributionModal setIsModalOpen={setIsModalOpen} selected={selected} />}
     </Container>
   );
 }

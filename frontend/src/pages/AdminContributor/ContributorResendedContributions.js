@@ -2,6 +2,7 @@ import TableComponent from 'components/TableComponent';
 import UnhandledContributions from 'components/UnhandledContributions';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import {
   changeContribution,
   deleteContribution,
@@ -76,7 +77,13 @@ export default function VerifierNewIncomingRequests() {
 
   const [selected, setSelected] = useState({});
 
-  const handleClick = () => {};
+  let history = useHistory();
+  const handleClick = () => {
+    history.push({
+      pathname: '/contribute',
+      state: { modifiedContribution: selected },
+    });
+  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
